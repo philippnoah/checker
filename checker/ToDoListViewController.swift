@@ -66,7 +66,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
             
         } else if segue.identifier == "newTask" {
             let taskViewController = segue.destinationViewController as! TaskViewController
-            let newTask = Task(title: "Title", description: "Description...")
+            let newTask = Task(title: "Title", description: "Description...", expirationDate: NSDate())
             taskViewController.taskToEdit = newTask
             taskViewController.taskArray = self.taskArray
         }

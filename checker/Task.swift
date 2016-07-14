@@ -12,10 +12,12 @@ class Task {
     
     var title: String
     var description: String
+    var expirationDate: NSDate
     
-    init(title: String, description: String) {
+    init(title: String, description: String, expirationDate: NSDate) {
         self.title = title
         self.description = description
+        self.expirationDate = expirationDate
     }
     
 }
