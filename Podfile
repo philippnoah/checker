@@ -6,5 +6,8 @@ target 'checker' do
   use_frameworks!
   # Pods for checker
   pod ‘Firebase’
+  pod 'Firebase/Database'
+  pod ‘Realm‘
+  pod ‘RealmSwift’
 
 end

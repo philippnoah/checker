@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3336CC141D39726C00934D9E /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC131D39726C00934D9E /* RealmHelper.swift */; };
+		3336CC161D39884800934D9E /* FirebaseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC151D39884800934D9E /* FirebaseHelper.swift */; };
+		3336CC181D39B3D200934D9E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC171D39B3D200934D9E /* LoginViewController.swift */; };
+		3336CC1A1D39B5E200934D9E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC191D39B5E200934D9E /* SignUpViewController.swift */; };
+		3336CC1C1D39DDB600934D9E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC1B1D39DDB600934D9E /* User.swift */; };
 		33DEB4D81D359A4F00B800FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DEB4D71D359A4F00B800FB /* AppDelegate.swift */; };
 		33DEB4DA1D359A4F00B800FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DEB4D91D359A4F00B800FB /* ViewController.swift */; };
 		33DEB4DD1D359A4F00B800FB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33DEB4DB1D359A4F00B800FB /* Main.storyboard */; };
@@ -26,6 +31,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3336CC131D39726C00934D9E /* RealmHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		3336CC151D39884800934D9E /* FirebaseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseHelper.swift; sourceTree = "<group>"; };
+		3336CC171D39B3D200934D9E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		3336CC191D39B5E200934D9E /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		3336CC1B1D39DDB600934D9E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		33DEB4D41D359A4F00B800FB /* checker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = checker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DEB4D71D359A4F00B800FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33DEB4D91D359A4F00B800FB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +78,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3336CC121D39725C00934D9E /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3336CC131D39726C00934D9E /* RealmHelper.swift */,
+				3336CC151D39884800934D9E /* FirebaseHelper.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
 		33DEB4CB1D359A4F00B800FB = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +110,7 @@
 			children = (
 				33DEB4D71D359A4F00B800FB /* AppDelegate.swift */,
 				33DEB4D91D359A4F00B800FB /* ViewController.swift */,
+				3336CC121D39725C00934D9E /* Helper */,
 				33DEB4F41D35A5D700B800FB /* Cell Prototypes */,
 				33DEB4F31D35A5C800B800FB /* Models */,
 				33DEB4DB1D359A4F00B800FB /* Main.storyboard */,
@@ -111,6 +131,8 @@
 				33DEB51D1D36CDBD00B800FB /* TaskViewController.swift */,
 				33DEB4ED1D359FB300B800FB /* BuddiesViewController.swift */,
 				33DEB4EF1D359FBC00B800FB /* SettingsViewController.swift */,
+				3336CC171D39B3D200934D9E /* LoginViewController.swift */,
+				3336CC191D39B5E200934D9E /* SignUpViewController.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -127,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				33DEB51F1D36D53E00B800FB /* Task.swift */,
+				3336CC1B1D39DDB600934D9E /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -273,14 +296,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3336CC181D39B3D200934D9E /* LoginViewController.swift in Sources */,
 				33DEB4EA1D359BC500B800FB /* TabBarController.swift in Sources */,
+				3336CC141D39726C00934D9E /* RealmHelper.swift in Sources */,
 				33DEB4F61D35A5EC00B800FB /* TaskCells.swift in Sources */,
+				3336CC1C1D39DDB600934D9E /* User.swift in Sources */,
 				33DEB4F81D35BB4700B800FB /* BuddyCell.swift in Sources */,
 				33DEB4EC1D359C5900B800FB /* ToDoListViewController.swift in Sources */,
 				33DEB5201D36D53E00B800FB /* Task.swift in Sources */,
 				33DEB4EE1D359FB300B800FB /* BuddiesViewController.swift in Sources */,
 				33DEB4DA1D359A4F00B800FB /* ViewController.swift in Sources */,
+				3336CC1A1D39B5E200934D9E /* SignUpViewController.swift in Sources */,
 				33DEB4D81D359A4F00B800FB /* AppDelegate.swift in Sources */,
+				3336CC161D39884800934D9E /* FirebaseHelper.swift in Sources */,
 				33DEB51E1D36CDBD00B800FB /* TaskViewController.swift in Sources */,
 				33DEB4F01D359FBC00B800FB /* SettingsViewController.swift in Sources */,
 				33DEB4FA1D35C45900B800FB /* SettingCell.swift in Sources */,

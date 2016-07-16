@@ -7,17 +7,13 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Task {
+
+class Task: Object {
     
-    var title: String
-    var description: String
-    var expirationDate: NSDate
-    
-    init(title: String, description: String, expirationDate: NSDate) {
-        self.title = title
-        self.description = description
-        self.expirationDate = expirationDate
-    }
+    dynamic var title: String = ""
+    dynamic var descriptionText: String = ""
+    dynamic var expirationDate: NSDate = NSDate()
     
 }

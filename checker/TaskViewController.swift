@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RealmSwift
+import Firebase
 
 class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
     
@@ -14,40 +16,57 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet var taskTitleTextField: UITextField!
     @IBOutlet var taskDescriptionTextField: UITextView!
     
+    
+    var taskArray: Results<Task>!
     var taskToEdit: Task!
-    var taskArray: [Task]!
+    var isNewTask = false
     var textViewEdited = false
+    let realm = try! Realm()
+    var ref = FIRDatabaseReference()
+    var user = "thedan"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.ref = FIRDatabase.database().reference()
         self.navigationController?.navigationBarHidden = false
         taskDescriptionTextField.delegate = self
         taskTitleTextField.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
+        taskDescriptionTextField.enablesReturnKeyAutomatically = true
 
         self.taskExpirationDatePicker.date = taskToEdit.expirationDate
         self.taskTitleTextField.text = taskToEdit.title
-        self.taskDescriptionTextField.text = taskToEdit.description
+        self.taskDescriptionTextField.text = taskToEdit.descriptionText
+        
         if taskToEdit != nil {
         } else {
-            taskToEdit = Task(title: "Title", description: "Description...", expirationDate: NSDate())
+            taskToEdit = Task()
+            taskToEdit.title = "Title"
+            taskToEdit.descriptionText = "Description"
+            taskToEdit.expirationDate = NSDate()
         }
         taskDescriptionTextField.textContainer.maximumNumberOfLines = 1
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "save" {
-            if taskTitleTextField.text != "" && taskDescriptionTextField.text != "" {
-                if taskTitleTextField.text != taskToEdit.title {
+        if segue.identifier != "ssave" {
             
-                let toDoListViewController = segue.destinationViewController as! ToDoListViewController
-                    let newTask = Task(title: taskTitleTextField.text!, description: taskDescriptionTextField.text!, expirationDate: taskExpirationDatePicker.date)
-                self.taskArray.append(newTask)
-                toDoListViewController.taskArray = self.taskArray
-                    print(taskExpirationDatePicker.date)
-                                        
+            if taskTitleTextField.text != "" && taskDescriptionTextField.text != "" {
+                
+                let newTask = Task()
+                newTask.title = taskTitleTextField.text!
+                newTask.descriptionText = taskDescriptionTextField.text!
+                newTask.expirationDate = taskExpirationDatePicker.date
+                
+                if isNewTask == true {
+                    
+                    RealmHelper.addTask(newTask)
+                    
                 } else {
-                    let toDoListViewController = segue.destinationViewController as! ToDoListViewController
-                    toDoListViewController.taskArray = self.taskArray
+                    
+                    RealmHelper.updateTask(taskToEdit, newTask: newTask)
+                    
                 }
             }
         } else {
@@ -59,6 +78,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     func textViewDidBeginEditing(textView: UITextView) {
         if textViewEdited == false {
         taskDescriptionTextField.text = ""
+            textViewEdited = true
         }
     }
     
@@ -67,6 +87,19 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         //If the text is larger than the maxtext, the return is false
         
         // Swift 2.0
-        return textView.text.characters.count + (text.characters.count - range.length) <= maxLength
+        return textView.text!.characters.count + (text.characters.count - range.length) <= maxLength
     }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        let maxLength: Int = 16
+        //If the text is larger than the maxtext, the return is false
+        
+        // Swift 2.0
+        return textField.text!.characters.count + (string.characters.count - range.length) <= maxLength
+    }
+    
+    func saveToFirebase() {
+        self.ref.child("users").child(user).setValue(["username": user])
+    }
+    
 }

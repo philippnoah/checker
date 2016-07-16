@@ -8,27 +8,35 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 class ToDoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var toDoListTitleLabel: UILabel!
     
     @IBOutlet var taskTableView: UITableView!
-
-    var taskArray = [Task]()
-    var tempArray = [Task]()
+    
+    let realm = try! Realm()
+    
+    var ref = FIRDatabaseReference()
+    
+    var taskArray: Results<Task>! {
+        didSet {
+            taskTableView.reloadData()
+        }
+    }
+    
     let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBarHidden = true
-        taskTableView.reloadData()
+        taskArray = RealmHelper.retrieveTasks()
+        self.ref = FIRDatabase.database().reference()
     }
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
-        taskTableView.reloadData()
-
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -42,6 +50,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return taskArray.count + 1
     }
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -66,14 +75,46 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
             
         } else if segue.identifier == "newTask" {
             let taskViewController = segue.destinationViewController as! TaskViewController
-            let newTask = Task(title: "Title", description: "Description...", expirationDate: NSDate())
+            let newTask = Task()
+            newTask.title = ""
+            newTask.descriptionText = "Description..."
+            newTask.expirationDate = NSDate()
+            
+            taskViewController.isNewTask = true
             taskViewController.taskToEdit = newTask
             taskViewController.taskArray = self.taskArray
         }
     }
     
-    func changeTaskArray(task: Task) {
-        taskArray.append(task)
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if indexPath.row == taskArray.count {
+            return .None
+        }
+        
+        return .Delete
     }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView.cellForRowAtIndexPath(indexPath)?.reuseIdentifier == "taskCell" {
+            if editingStyle == .Delete {
+                //1
+                RealmHelper.deleteTask(taskArray[indexPath.row])
+                taskArray = RealmHelper.retrieveTasks()
+            }
+        }
+    }
+    
+    func compareDataWithFirebase() {
+        ref.child("tasks").child("").observeSingleEventOfType(.Value, withBlock: {
+            (snapshot) in
+
+                print(snapshot)
+                
+        }) {
+            (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
     
 }
