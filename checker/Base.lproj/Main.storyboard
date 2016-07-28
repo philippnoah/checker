@@ -52,8 +52,8 @@
                                     <outlet property="delegate" destination="LrR-hb-CUP" id="3uE-B0-GYP"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Buddies" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlP-bb-uT3">
-                                <rect key="frame" x="251" y="46" width="99" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your buddy's tasks" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qlP-bb-uT3">
+                                <rect key="frame" x="187" y="46" width="227" height="35"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -61,12 +61,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="qlP-bb-uT3" firstAttribute="top" secondItem="vZt-Mf-qV6" secondAttribute="bottom" constant="26" id="46s-ln-O4f"/>
-                            <constraint firstItem="QxB-EU-EDu" firstAttribute="leading" secondItem="8AA-4Z-QPy" secondAttribute="leading" id="5u1-Gw-uev"/>
-                            <constraint firstItem="qlP-bb-uT3" firstAttribute="centerX" secondItem="QxB-EU-EDu" secondAttribute="centerX" id="hbu-9Y-syV"/>
-                            <constraint firstItem="QxB-EU-EDu" firstAttribute="bottom" secondItem="zZI-Aa-BBu" secondAttribute="top" id="nPb-Te-oaV"/>
-                            <constraint firstAttribute="trailing" secondItem="QxB-EU-EDu" secondAttribute="trailing" id="utN-ZV-op8"/>
-                            <constraint firstItem="QxB-EU-EDu" firstAttribute="top" secondItem="qlP-bb-uT3" secondAttribute="bottom" constant="8" id="vGx-4J-PXp"/>
+                            <constraint firstItem="QxB-EU-EDu" firstAttribute="top" secondItem="qlP-bb-uT3" secondAttribute="bottom" constant="8" symbolic="YES" id="3yV-mP-J6g"/>
+                            <constraint firstItem="QxB-EU-EDu" firstAttribute="bottom" secondItem="zZI-Aa-BBu" secondAttribute="top" id="AIT-Ws-wyZ"/>
+                            <constraint firstItem="qlP-bb-uT3" firstAttribute="top" secondItem="vZt-Mf-qV6" secondAttribute="bottom" constant="26" id="AUm-FK-fez"/>
+                            <constraint firstItem="QxB-EU-EDu" firstAttribute="leading" secondItem="8AA-4Z-QPy" secondAttribute="leading" id="Ejh-R3-RDs"/>
+                            <constraint firstItem="qlP-bb-uT3" firstAttribute="centerX" secondItem="QxB-EU-EDu" secondAttribute="centerX" id="M06-Hb-DyC"/>
+                            <constraint firstAttribute="trailing" secondItem="QxB-EU-EDu" secondAttribute="trailing" id="v60-sP-Hky"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="A5K-if-QzB"/>

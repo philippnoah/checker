@@ -21,9 +21,8 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     var taskToEdit: Task!
     var isNewTask = false
     var textViewEdited = false
-    let realm = try! Realm()
     var ref = FIRDatabaseReference()
-    var user = "testuser"
+    var currentUser = "superuser" //RealmHelper.getUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +70,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func textViewDidBeginEditing(textView: UITextView) {
         if textViewEdited == false {
-        taskDescriptionTextField.text = ""
+            taskDescriptionTextField.text = ""
             textViewEdited = true
         }
     }
@@ -93,7 +92,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
     
     func saveToFirebase() {
-        self.ref.child("users").child(user).setValue(["username": user])
+        self.ref.child("users").child(currentUser).setValue(["username": currentUser])
     }
     
 }
