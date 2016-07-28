@@ -16,8 +16,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet var taskTitleTextField: UITextField!
     @IBOutlet var taskDescriptionTextField: UITextView!
     
-    
-    var taskArray: [Task] = [Task(title: "myTitle", descriptionText: "myDescriptionText", dueDate: NSDate())]
+    var taskArray: [Task] = []
     var taskToEdit: Task!
     var isNewTask = false
     var textViewEdited = false
@@ -26,48 +25,51 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.ref = FIRDatabase.database().reference()
         self.navigationController?.navigationBarHidden = false
-        taskDescriptionTextField.delegate = self
-        taskTitleTextField.delegate = self
-        self.automaticallyAdjustsScrollViewInsets = false
-        taskDescriptionTextField.enablesReturnKeyAutomatically = true
+        textFieldAndtextViewSetUp()
+    }
+}
 
-        self.taskExpirationDatePicker.date = taskToEdit.dueDate
-        self.taskTitleTextField.text = taskToEdit.title
-        self.taskDescriptionTextField.text = taskToEdit.descriptionText
-        
-        if taskToEdit != nil {
-        } else {
-            taskToEdit = Task(title: "Title", descriptionText: "Description", dueDate: NSDate())
+extension TaskViewController {
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if self.taskTitleTextField.text == "" || self.taskDescriptionTextField.text == "" {
+         return false
         }
-        taskDescriptionTextField.textContainer.maximumNumberOfLines = 1
+        
+        if identifier == "save" {
+            saveTaskToFirebase()
+            return true
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return true
+        }
+    }
+    
+    func saveTaskToFirebase() {
+    
+        if isNewTask {
+            self.ref.child("tasks").child(currentUser).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
+        } else {
+            
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier != "ssave" {
+        if segue.identifier == "save" {
             
-            if taskTitleTextField.text != "" && taskDescriptionTextField.text != "" {
-                
-                let _ = Task(title: taskTitleTextField.text!, descriptionText: taskDescriptionTextField.text!, dueDate: taskExpirationDatePicker.date)
-                
-                if isNewTask == true {
-                    
-                    //RealmHelper.addTask(newTask)
-                    
-                } else {
-                    
-                    //RealmHelper.updateTask(taskToEdit, newTask: newTask)
-                    
-                }
-            }
-        } else {
             let toDoListViewController = segue.destinationViewController as! ToDoListViewController
+            self.taskArray.append(Task(title: self.taskTitleTextField.text!, descriptionText: self.taskDescriptionTextField.text!, dueDate: self.taskExpirationDatePicker.date))
             toDoListViewController.taskArray = self.taskArray
+            toDoListViewController.taskTableView.reloadData()
+        } else {
+        print(self)
         }
     }
-    
+}
+
+extension TaskViewController {
+
     func textViewDidBeginEditing(textView: UITextView) {
         if textViewEdited == false {
             taskDescriptionTextField.text = ""
@@ -77,22 +79,25 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         let maxLength: Int = 100
-        //If the text is larger than the maxtext, the return is false
-        
-        // Swift 2.0
         return textView.text!.characters.count + (text.characters.count - range.length) <= maxLength
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         let maxLength: Int = 16
-        //If the text is larger than the maxtext, the return is false
-        
-        // Swift 2.0
         return textField.text!.characters.count + (string.characters.count - range.length) <= maxLength
     }
     
-    func saveToFirebase() {
-        self.ref.child("users").child(currentUser).setValue(["username": currentUser])
+    func textFieldAndtextViewSetUp() {
+        taskDescriptionTextField.delegate = self
+        taskTitleTextField.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false
+        taskDescriptionTextField.enablesReturnKeyAutomatically = true
+        taskDescriptionTextField.textContainer.maximumNumberOfLines = 1
+        if taskToEdit == nil {
+            taskToEdit = Task(title: "Title", descriptionText: "Description", dueDate: NSDate())
+        }
+        self.taskExpirationDatePicker.date = taskToEdit.dueDate
+        self.taskTitleTextField.text = taskToEdit.title
+        self.taskDescriptionTextField.text = taskToEdit.descriptionText
     }
-    
 }

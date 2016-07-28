@@ -14,12 +14,13 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet var toDoListTitleLabel: UILabel!
     @IBOutlet var taskTableView: UITableView!
+    @IBAction func unwindToToDoListViewController(segue: UIStoryboardSegue) { }
     
     var ref = FIRDatabaseReference()
     var currentUser = "superuser"//RealmHelper.getUser()
-    var taskArray = [Task]() {
+    var taskArray: [Task] = [] {
         didSet {
-            taskTableView.reloadData()
+            self.taskTableView.reloadData()
         }
     }
     
@@ -100,19 +101,19 @@ extension ToDoListViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTask" {
             
-            //            let taskViewController = segue.destinationViewController as! TaskViewController
-            //            let indexPath = taskTableView.indexPathForSelectedRow!
-            //            taskViewController.taskToEdit = self.taskArray[indexPath.row]
-            //            taskViewController.taskArray = self.taskArray
+            let taskViewController = segue.destinationViewController as! TaskViewController
+            let indexPath = taskTableView.indexPathForSelectedRow!
+            taskViewController.taskToEdit = self.taskArray[indexPath.row]
+            taskViewController.taskArray = self.taskArray
             
         } else if segue.identifier == "newTask" {
             
-            //            let taskViewController = segue.destinationViewController as! TaskViewController
-            //            let newTask = Task(title: "", descriptionText: "Description...", dueDate: NSDate())
-            //
-            //            taskViewController.isNewTask = true
-            //            taskViewController.taskToEdit = newTask
-            //            taskViewController.taskArray = self.taskArray
+                        let taskViewController = segue.destinationViewController as! TaskViewController
+                        let newTask = Task(title: "", descriptionText: "Description...", dueDate: NSDate())
+            
+                        taskViewController.isNewTask = true
+                        taskViewController.taskToEdit = newTask
+                        taskViewController.taskArray = self.taskArray
             
         }
     }
@@ -130,7 +131,6 @@ extension ToDoListViewController {
             }
             
             self.taskArray = []
-
             for tempTask in tempListOfTasks {
                 
                 let title = tempTask.1["title"] as! String
@@ -139,6 +139,8 @@ extension ToDoListViewController {
                 let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
                 self.taskArray.append(task)
             }
+            
+            self.taskTableView.reloadData()
             
             // ...
         }) { (error) in
