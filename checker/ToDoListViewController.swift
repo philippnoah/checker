@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MGSwipeTableCell
 
 class ToDoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -41,10 +42,37 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-            let cell = tableView.dequeueReusableCellWithIdentifier("taskCell", forIndexPath: indexPath) as! TaskCell
-            cell.taskLabel.text = self.taskArray[indexPath.row].title
+        let reuseIdentifier = "taskCell"
+        var cell = self.taskTableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as! MGSwipeTableCell!
+        if cell == nil
+        {
+            cell = MGSwipeTableCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: reuseIdentifier)
+        }
+        
+        cell.textLabel!.text = taskArray[indexPath.row].title
+        
+        let leftSwipeButton = MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            print("left button pressed")
+            return true
+        })
+        
+        let rightSwipeButton = MGSwipeButton(title: "Done", backgroundColor: UIColor.greenColor(), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            print("right button pressed")
+            return true
+        })
+        
+        //configure left buttons
+        cell.leftButtons = [leftSwipeButton]
+        cell.leftSwipeSettings.transition = MGSwipeTransition.Static
+        
+        //configure right buttons
+        cell.rightButtons = [rightSwipeButton]
+        cell.rightSwipeSettings.transition = MGSwipeTransition.Drag
         
         return cell
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

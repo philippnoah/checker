@@ -326,29 +326,14 @@
                                 <rect key="frame" x="0.0" y="88" width="600" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="qIZ-fd-JEN" customClass="TaskCell" customModule="checker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCell" id="qIZ-fd-JEN" customClass="MGSwipeTableCell">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qIZ-fd-JEN" id="Xnh-Sn-xIk">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RuS-jW-fOl">
-                                                    <rect key="frame" x="17" y="11" width="575" height="21"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="20"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="RuS-jW-fOl" firstAttribute="leading" secondItem="Xnh-Sn-xIk" secondAttribute="leadingMargin" constant="9" id="GIJ-Q8-U8m"/>
-                                                <constraint firstItem="RuS-jW-fOl" firstAttribute="centerY" secondItem="Xnh-Sn-xIk" secondAttribute="centerY" id="ewg-mH-Jgn"/>
-                                                <constraint firstItem="RuS-jW-fOl" firstAttribute="trailing" secondItem="Xnh-Sn-xIk" secondAttribute="trailingMargin" id="nkf-0d-Tc9"/>
-                                                <constraint firstItem="RuS-jW-fOl" firstAttribute="top" secondItem="Xnh-Sn-xIk" secondAttribute="topMargin" constant="3" id="wsp-UW-m96"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="taskLabel" destination="RuS-jW-fOl" id="RPx-vz-CCI"/>
                                             <segue destination="cnz-Gd-sEa" kind="show" identifier="showTask" id="xjw-ro-8rH"/>
                                         </connections>
                                     </tableViewCell>
