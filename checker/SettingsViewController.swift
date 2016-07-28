@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet var settingsTableView: UITableView!
     
-    var taskArray = ["Buddies","Sync with iCloud", "Chat", "Random Setting"]
+    var taskArray = ["Sync with iCloud", "Chat", "Random Setting"]
     
     
     override func viewDidLoad() {

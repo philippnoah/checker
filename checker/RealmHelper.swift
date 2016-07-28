@@ -10,33 +10,24 @@ import Foundation
 import RealmSwift
 
 class RealmHelper {
-    //static methods will go here
     
-    static func addTask(task: Task) {
+    static func login(user: User) {
         let realm = try! Realm()
         try! realm.write() {
-            realm.add(task)
+            realm.add(user)
         }
     }
     
-    static func deleteTask(task: Task) {
+    static func logout(user: User) {
         let realm = try! Realm()
         try! realm.write() {
-            realm.delete(task)
+            realm.delete(user)
         }
     }
     
-    static func updateTask(taskToBeUpdated: Task, newTask: Task) {
+    static func getUser() -> User {
         let realm = try! Realm()
-        try! realm.write() {
-            taskToBeUpdated.title = newTask.title
-            taskToBeUpdated.descriptionText = newTask.descriptionText
-            taskToBeUpdated.expirationDate = newTask.expirationDate
-        }
+        return Array(realm.objects(User))[0]
     }
     
-    static func retrieveTasks() -> Results<Task> {
-        let realm = try! Realm()
-        return realm.objects(Task)//.sorted("modificationTime", ascending: false)
-    }
 }

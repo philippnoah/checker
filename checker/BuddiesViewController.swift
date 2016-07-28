@@ -14,8 +14,7 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet var buddyListTableView: UITableView!
     
-    var taskArray = ["arnold","herbert","ben","catrina","sabrina","justin"]
-    
+    var listOfBuddyTasks = ["arnold","herbert","ben","catrina","sabrina","justin"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +25,12 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count
+        return listOfBuddyTasks.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyCell
-        cell.buddyName.text = self.taskArray[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyTaskCell
+        cell.buddyTaskLabel.text = self.listOfBuddyTasks[indexPath.row]
         
         return cell
     }

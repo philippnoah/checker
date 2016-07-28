@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="89" width="600" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buddyCell" id="2HJ-ot-JBP" customClass="BuddyCell" customModule="checker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buddyCell" id="2HJ-ot-JBP" customClass="BuddyTaskCell" customModule="checker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2HJ-ot-JBP" id="Fz8-m2-5md">
@@ -43,7 +43,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="buddyName" destination="hBO-M9-bDz" id="MW5-8E-297"/>
+                                            <outlet property="buddyTaskLabel" destination="hBO-M9-bDz" id="6zl-Mr-srE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -143,7 +143,7 @@
                                     <outlet property="delegate" destination="cnz-Gd-sEa" id="RSv-mz-0eH"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="When do you want to be done with this task?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-T4-3co">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Due Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-T4-3co">
                                 <rect key="frame" x="20" y="230" width="560" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -229,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZiG-KH-fa3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-908" y="1930"/>
+            <point key="canvasLocation" x="-314" y="1724"/>
         </scene>
         <!--Settings-->
         <scene sceneID="9xh-2y-wMM">
@@ -352,34 +352,6 @@
                                             <segue destination="cnz-Gd-sEa" kind="show" identifier="showTask" id="xjw-ro-8rH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="newTaskCell" id="WPU-2m-KW5" customClass="NewTaskCell" customModule="checker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WPU-2m-KW5" id="xaJ-gg-tAY">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGd-eU-c3x">
-                                                    <rect key="frame" x="16" y="11" width="59" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="59" id="00k-8U-fYc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="18"/>
-                                                    <color key="textColor" red="0.0" green="0.4566611071051625" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="gGd-eU-c3x" firstAttribute="centerY" secondItem="xaJ-gg-tAY" secondAttribute="centerY" id="0Co-TU-Ia6"/>
-                                                <constraint firstItem="gGd-eU-c3x" firstAttribute="leading" secondItem="xaJ-gg-tAY" secondAttribute="leadingMargin" constant="8" id="BWF-ji-ir2"/>
-                                                <constraint firstItem="gGd-eU-c3x" firstAttribute="top" secondItem="xaJ-gg-tAY" secondAttribute="topMargin" constant="3" id="TeX-TA-Ovx"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="taskLabel" destination="gGd-eU-c3x" id="Rbv-J6-LXS"/>
-                                            <segue destination="cnz-Gd-sEa" kind="show" identifier="newTask" id="QFI-7j-QqL"/>
-                                        </connections>
-                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Mfk-FQ-1Hg" id="evA-Xp-BgS"/>
@@ -420,8 +392,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8at-xv-kgw">
-                                <rect key="frame" x="274" y="562" width="52" height="30"/>
-                                <state key="normal" title="Sign up"/>
+                                <rect key="frame" x="236" y="562" width="129" height="30"/>
+                                <state key="normal" title="New here? Sign up"/>
                                 <connections>
                                     <segue destination="4TB-v6-ytn" kind="show" identifier="goToSignUp" id="eYF-YS-KCo"/>
                                 </connections>
@@ -440,7 +412,6 @@
                                 <rect key="frame" x="281" y="323" width="38" height="30"/>
                                 <state key="normal" title="Login"/>
                                 <connections>
-                                    <action selector="loginButtonPressed:" destination="AP1-BH-Yw8" eventType="touchUpInside" id="xiP-ES-FUG"/>
                                     <segue destination="4wX-GH-gAn" kind="show" identifier="login" id="a9A-Bs-kNw"/>
                                 </connections>
                             </button>
@@ -480,13 +451,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiM-xv-Ebc">
-                                <rect key="frame" x="281" y="550" width="38" height="30"/>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <segue destination="AP1-BH-Yw8" kind="show" identifier="goToLogin" id="311-zL-8gp"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBS-eq-i3A">
                                 <rect key="frame" x="20" y="247" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -501,23 +465,29 @@
                                 <rect key="frame" x="247" y="323" width="107" height="30"/>
                                 <state key="normal" title="Create Account"/>
                                 <connections>
-                                    <action selector="createAccountButtonPressed:" destination="4TB-v6-ytn" eventType="touchUpInside" id="YGB-mM-xPU"/>
                                     <segue destination="4wX-GH-gAn" kind="show" identifier="createAccount" id="khh-n7-npc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiM-xv-Ebc">
+                                <rect key="frame" x="187" y="550" width="226" height="30"/>
+                                <state key="normal" title="Already have an account? Sign in"/>
+                                <connections>
+                                    <segue destination="AP1-BH-Yw8" kind="show" identifier="goToLogin" id="311-zL-8gp"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="kHi-FT-QJK" secondAttribute="trailingMargin" id="4W0-3k-5EK"/>
-                            <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="co8-g9-cXV" secondAttribute="trailing" id="4sE-jR-Nn8"/>
-                            <constraint firstItem="co8-g9-cXV" firstAttribute="centerY" secondItem="kHi-FT-QJK" secondAttribute="centerY" id="6yp-H8-0ow"/>
-                            <constraint firstItem="G2P-Lp-Cec" firstAttribute="top" secondItem="co8-g9-cXV" secondAttribute="bottom" constant="8" symbolic="YES" id="8jr-LS-li5"/>
-                            <constraint firstAttribute="bottom" secondItem="qiM-xv-Ebc" secondAttribute="bottom" constant="20" symbolic="YES" id="Lq6-st-b1X"/>
-                            <constraint firstItem="JBS-eq-i3A" firstAttribute="leading" secondItem="kHi-FT-QJK" secondAttribute="leadingMargin" id="SDx-Bi-FCq"/>
-                            <constraint firstItem="co8-g9-cXV" firstAttribute="centerX" secondItem="G2P-Lp-Cec" secondAttribute="centerX" id="XFz-ot-kyI"/>
-                            <constraint firstItem="JBS-eq-i3A" firstAttribute="leading" secondItem="co8-g9-cXV" secondAttribute="leading" id="ffA-cl-Owa"/>
-                            <constraint firstItem="G2P-Lp-Cec" firstAttribute="centerX" secondItem="qiM-xv-Ebc" secondAttribute="centerX" id="ffB-0a-quq"/>
-                            <constraint firstItem="co8-g9-cXV" firstAttribute="top" secondItem="JBS-eq-i3A" secondAttribute="bottom" constant="8" symbolic="YES" id="rUZ-5j-Hd1"/>
+                            <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="kHi-FT-QJK" secondAttribute="trailingMargin" id="0zZ-GC-ulA"/>
+                            <constraint firstItem="co8-g9-cXV" firstAttribute="centerY" secondItem="kHi-FT-QJK" secondAttribute="centerY" id="6Di-cz-bx7"/>
+                            <constraint firstItem="co8-g9-cXV" firstAttribute="top" secondItem="JBS-eq-i3A" secondAttribute="bottom" constant="8" symbolic="YES" id="BmS-wq-kj8"/>
+                            <constraint firstItem="JBS-eq-i3A" firstAttribute="leading" secondItem="co8-g9-cXV" secondAttribute="leading" id="Dob-b3-GwQ"/>
+                            <constraint firstItem="JBS-eq-i3A" firstAttribute="leading" secondItem="kHi-FT-QJK" secondAttribute="leadingMargin" id="N50-yi-wmU"/>
+                            <constraint firstItem="G2P-Lp-Cec" firstAttribute="top" secondItem="co8-g9-cXV" secondAttribute="bottom" constant="8" symbolic="YES" id="aKM-Uh-dd8"/>
+                            <constraint firstAttribute="bottom" secondItem="qiM-xv-Ebc" secondAttribute="bottom" constant="20" symbolic="YES" id="bqF-rO-14S"/>
+                            <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="co8-g9-cXV" secondAttribute="trailing" id="ez6-Tx-58h"/>
+                            <constraint firstItem="co8-g9-cXV" firstAttribute="centerX" secondItem="G2P-Lp-Cec" secondAttribute="centerX" id="glU-N5-4fz"/>
+                            <constraint firstItem="G2P-Lp-Cec" firstAttribute="centerX" secondItem="qiM-xv-Ebc" secondAttribute="centerX" id="tKi-Xm-xSF"/>
                         </constraints>
                     </view>
                     <connections>
@@ -569,7 +539,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QFI-7j-QqL"/>
         <segue reference="3w6-Eu-7bs"/>
         <segue reference="khh-n7-npc"/>
     </inferredMetricsTieBreakers>

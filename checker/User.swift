@@ -8,6 +8,9 @@
 import RealmSwift
 
 class User: Object {
+    
     dynamic var username: String!
     dynamic var password: String!
+    dynamic var buddy: User?
+
 }

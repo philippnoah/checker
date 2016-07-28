@@ -8,7 +8,8 @@
 
 import UIKit
 
-class BuddyCell: UITableViewCell {
+class BuddyTaskCell: UITableViewCell {
     
-    @IBOutlet var buddyName: UILabel!
+    @IBOutlet var buddyTaskLabel: UILabel!
+    
 }

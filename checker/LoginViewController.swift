@@ -13,11 +13,9 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
-    @IBAction func loginButtonPressed(sender: UIButton) {
-    }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if sender?.identifier == "" {}
+        if identifier == "" {}
         return true
     }
     

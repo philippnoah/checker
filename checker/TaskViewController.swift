@@ -17,13 +17,13 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet var taskDescriptionTextField: UITextView!
     
     
-    var taskArray: Results<Task>!
+    var taskArray: [Task] = [Task(title: "myTitle", descriptionText: "myDescriptionText", dueDate: NSDate())]
     var taskToEdit: Task!
     var isNewTask = false
     var textViewEdited = false
     let realm = try! Realm()
     var ref = FIRDatabaseReference()
-    var user = "thedan"
+    var user = "testuser"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,16 +35,13 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.automaticallyAdjustsScrollViewInsets = false
         taskDescriptionTextField.enablesReturnKeyAutomatically = true
 
-        self.taskExpirationDatePicker.date = taskToEdit.expirationDate
+        self.taskExpirationDatePicker.date = taskToEdit.dueDate
         self.taskTitleTextField.text = taskToEdit.title
         self.taskDescriptionTextField.text = taskToEdit.descriptionText
         
         if taskToEdit != nil {
         } else {
-            taskToEdit = Task()
-            taskToEdit.title = "Title"
-            taskToEdit.descriptionText = "Description"
-            taskToEdit.expirationDate = NSDate()
+            taskToEdit = Task(title: "Title", descriptionText: "Description", dueDate: NSDate())
         }
         taskDescriptionTextField.textContainer.maximumNumberOfLines = 1
     }
@@ -54,18 +51,15 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
             
             if taskTitleTextField.text != "" && taskDescriptionTextField.text != "" {
                 
-                let newTask = Task()
-                newTask.title = taskTitleTextField.text!
-                newTask.descriptionText = taskDescriptionTextField.text!
-                newTask.expirationDate = taskExpirationDatePicker.date
+                let _ = Task(title: taskTitleTextField.text!, descriptionText: taskDescriptionTextField.text!, dueDate: taskExpirationDatePicker.date)
                 
                 if isNewTask == true {
                     
-                    RealmHelper.addTask(newTask)
+                    //RealmHelper.addTask(newTask)
                     
                 } else {
                     
-                    RealmHelper.updateTask(taskToEdit, newTask: newTask)
+                    //RealmHelper.updateTask(taskToEdit, newTask: newTask)
                     
                 }
             }

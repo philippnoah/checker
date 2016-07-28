@@ -8,20 +8,8 @@
 
 import UIKit
 
-protocol Cell {
-    
-    var taskLabel: UILabel! {get}
-    
-}
-
-class TaskCell: UITableViewCell, Cell {
+class TaskCell: UITableViewCell {
     
     @IBOutlet var taskLabel: UILabel!
 
-}
-
-class NewTaskCell: UITableViewCell, Cell {
-    
-    @IBOutlet var taskLabel: UILabel!
-    
 }

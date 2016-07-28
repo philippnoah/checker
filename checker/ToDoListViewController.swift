@@ -8,30 +8,17 @@
 
 import UIKit
 import Firebase
-import RealmSwift
 
 class ToDoListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var toDoListTitleLabel: UILabel!
-    
     @IBOutlet var taskTableView: UITableView!
     
-    let realm = try! Realm()
-    
     var ref = FIRDatabaseReference()
-    
-    var taskArray: Results<Task>! {
-        didSet {
-            taskTableView.reloadData()
-        }
-    }
-    
-    let deviceID = UIDevice.currentDevice().identifierForVendor!.UUIDString
+    var taskArray: [Task] = [Task(title: "test", descriptionText: "test", dueDate: NSDate())]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBarHidden = true
-        taskArray = RealmHelper.retrieveTasks()
         self.ref = FIRDatabase.database().reference()
     }
     
@@ -48,58 +35,44 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskArray.count + 1
+        return taskArray.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell : Cell
-        
-        if indexPath.row < taskArray.count {
-            cell = tableView.dequeueReusableCellWithIdentifier("taskCell", forIndexPath: indexPath) as! TaskCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("taskCell", forIndexPath: indexPath) as! TaskCell
             cell.taskLabel.text = self.taskArray[indexPath.row].title
-        } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("newTaskCell", forIndexPath: indexPath) as! NewTaskCell
-        }
         
-        return cell as! UITableViewCell
+        return cell
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTask" {
             
-            let taskViewController = segue.destinationViewController as! TaskViewController
-            let indexPath = taskTableView.indexPathForSelectedRow!
-            taskViewController.taskToEdit = self.taskArray[indexPath.row]
-            taskViewController.taskArray = self.taskArray
+//            let taskViewController = segue.destinationViewController as! TaskViewController
+//            let indexPath = taskTableView.indexPathForSelectedRow!
+//            taskViewController.taskToEdit = self.taskArray[indexPath.row]
+//            taskViewController.taskArray = self.taskArray
             
         } else if segue.identifier == "newTask" {
-            let taskViewController = segue.destinationViewController as! TaskViewController
-            let newTask = Task()
-            newTask.title = ""
-            newTask.descriptionText = "Description..."
-            newTask.expirationDate = NSDate()
             
-            taskViewController.isNewTask = true
-            taskViewController.taskToEdit = newTask
-            taskViewController.taskArray = self.taskArray
+//            let taskViewController = segue.destinationViewController as! TaskViewController
+//            let newTask = Task(title: "", descriptionText: "Description...", dueDate: NSDate())
+//            
+//            taskViewController.isNewTask = true
+//            taskViewController.taskToEdit = newTask
+//            taskViewController.taskArray = self.taskArray
+            
         }
-    }
-    
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        if indexPath.row == taskArray.count {
-            return .None
-        }
-        
-        return .Delete
     }
     
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if tableView.cellForRowAtIndexPath(indexPath)?.reuseIdentifier == "taskCell" {
             if editingStyle == .Delete {
                 //1
-                RealmHelper.deleteTask(taskArray[indexPath.row])
-                taskArray = RealmHelper.retrieveTasks()
+                //RealmHelper.deleteTask(taskArray[indexPath.row])
+                //taskArray = RealmHelper.retrieveTasks()
             }
         }
     }

@@ -11,4 +11,5 @@ import UIKit
 class SettingCell: UITableViewCell {
     
     @IBOutlet var settingTitleLabel: UILabel!
+    
 }
