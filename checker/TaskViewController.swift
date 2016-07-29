@@ -21,7 +21,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     var isNewTask = false
     var textViewEdited = false
     var ref = FIRDatabaseReference()
-    var currentUser = "superuser" //RealmHelper.getUser()
+    var currentUser = RealmHelper.getUser()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ extension TaskViewController {
     func saveTaskToFirebase() {
     
         if isNewTask {
-            self.ref.child("tasks").child(currentUser).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
+            self.ref.child("tasks").child(currentUser.username).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
         } else {
             
         }

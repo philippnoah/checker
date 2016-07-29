@@ -14,12 +14,34 @@ class LoginViewController: UIViewController {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == "" {}
-        return true
+    var currentUser: User = User()
+    var listOfUsers: [User] = []
+    var ref = FIRDatabaseReference()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.ref = FIRDatabase.database().reference()
     }
     
-    func validation() {
-        
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if identifier == "login" && validation() {
+            
+            currentUser.username = usernameTextField.text!
+            currentUser.password = passwordTextField.text!
+            RealmHelper.logout()
+            RealmHelper.login(currentUser)
+            return true
+            
+        } else if identifier == "goToSignUp" {
+            return true
+        }
+        return false
+    }
+    
+    func validation() -> Bool {
+        if usernameTextField.text != "" && passwordTextField.text != "" {
+            return true
+        }
+        return false
     }
 }

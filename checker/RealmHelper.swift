@@ -18,10 +18,10 @@ class RealmHelper {
         }
     }
     
-    static func logout(user: User) {
+    static func logout() {
         let realm = try! Realm()
         try! realm.write() {
-            realm.delete(user)
+            realm.deleteAll()
         }
     }
     

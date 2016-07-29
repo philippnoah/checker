@@ -12,9 +12,13 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet var buddiesTitelLabel: UILabel!
     
-    @IBOutlet var buddyListTableView: UITableView!
+    @IBOutlet var buddyTasksListTableView: UITableView!
     
-    var listOfBuddyTasks = ["arnold","herbert","ben","catrina","sabrina","justin"]
+    var listOfBuddyTasks: [Task] = [] {
+        didSet {
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,7 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyTaskCell
-        cell.buddyTaskLabel.text = self.listOfBuddyTasks[indexPath.row]
+        cell.buddyTaskLabel.text = self.listOfBuddyTasks[indexPath.row].title
         
         return cell
     }

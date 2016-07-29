@@ -11,10 +11,10 @@ import UIKit
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet var settingsTitleLabel: UILabel!
-    
+    @IBAction func unwindToToDoListViewController(segue: UIStoryboardSegue) { }
     @IBOutlet var settingsTableView: UITableView!
     
-    var taskArray = ["Sync with iCloud", "Chat", "Random Setting"]
+    var taskArray = ["Sync with iCloud", "Chat", "Logout"]
     
     
     override func viewDidLoad() {
@@ -34,5 +34,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.settingTitleLabel.text = self.taskArray[indexPath.row]
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch indexPath.row {
+        case 2:
+            RealmHelper.logout()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        default:
+            print("")
+        }
     }
 }

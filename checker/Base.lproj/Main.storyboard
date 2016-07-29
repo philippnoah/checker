@@ -232,7 +232,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZiG-KH-fa3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wtM-Rc-rrZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-279" y="1789"/>
+            <point key="canvasLocation" x="-314" y="1725"/>
         </scene>
         <!--Settings-->
         <scene sceneID="9xh-2y-wMM">
@@ -272,6 +272,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="settingTitleLabel" destination="a0Z-OO-bMa" id="y4Z-eO-4Vm"/>
+                                            <segue destination="qLv-qj-eGy" kind="unwind" identifier="logout" unwindAction="unwindToToDoListViewController:" id="akR-PR-ADc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -304,6 +305,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zk-zA-UsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="qLv-qj-eGy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1086" y="939"/>
         </scene>
@@ -319,7 +321,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-Sc-wg9">
+                            <navigationBar contentMode="scaleToFill" misplaced="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGG-Sc-wg9">
                                 <rect key="frame" x="0.0" y="41" width="600" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -337,13 +339,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stuff I should do" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTl-6H-Bhm">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Stuff I should do" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTl-6H-Bhm">
                                 <rect key="frame" x="204" y="45" width="193" height="35"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pdB-CM-A9g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="pdB-CM-A9g">
                                 <rect key="frame" x="0.0" y="88" width="600" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -404,7 +406,7 @@
                                 <rect key="frame" x="236" y="562" width="129" height="30"/>
                                 <state key="normal" title="New here? Sign up"/>
                                 <connections>
-                                    <segue destination="4TB-v6-ytn" kind="show" identifier="goToSignUp" id="eYF-YS-KCo"/>
+                                    <segue destination="4TB-v6-ytn" kind="presentation" identifier="goToSignUp" modalPresentationStyle="fullScreen" modalTransitionStyle="partialCurl" id="eYF-YS-KCo"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="superuser" borderStyle="roundedRect" placeholder="superuser" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="55L-Yh-F0w">
@@ -481,7 +483,7 @@
                                 <rect key="frame" x="187" y="550" width="226" height="30"/>
                                 <state key="normal" title="Already have an account? Sign in"/>
                                 <connections>
-                                    <segue destination="AP1-BH-Yw8" kind="show" identifier="goToLogin" id="311-zL-8gp"/>
+                                    <segue destination="pgG-6M-TYf" kind="unwind" identifier="goToLogin" unwindAction="unwindToLoginViewController:" id="8Da-FW-obB"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -505,6 +507,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zJ5-em-ha2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="pgG-6M-TYf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="710" y="-628"/>
         </scene>

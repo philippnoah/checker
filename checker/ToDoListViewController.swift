@@ -17,7 +17,8 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func unwindToToDoListViewController(segue: UIStoryboardSegue) { }
     
     var ref = FIRDatabaseReference()
-    var currentUser = "superuser"//RealmHelper.getUser()
+    var currentUser = RealmHelper.getUser()
+    var completedTaskArray: [Task] = []
     var taskArray: [Task] = [] {
         didSet {
             self.taskTableView.reloadData()
@@ -28,6 +29,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         setTasksForUserFromFirebase()
+        setCompletedTasksForUserFromFirebase()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -63,13 +65,13 @@ extension ToDoListViewController {
         
         let leftSwipeButton = MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
-            print("left button pressed")
+            self.removeTaskFromFirebase(indexPath.row)
             return true
         })
         
         let rightSwipeButton = MGSwipeButton(title: "Done", backgroundColor: UIColor.greenColor(), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
-            print("right button pressed")
+            self.completedTask(indexPath.row)
             return true
         })
         
@@ -83,16 +85,6 @@ extension ToDoListViewController {
         
         return cell
         
-    }
-    
-    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView.cellForRowAtIndexPath(indexPath)?.reuseIdentifier == "taskCell" {
-            if editingStyle == .Delete {
-                //1
-                //RealmHelper.deleteTask(taskArray[indexPath.row])
-                //taskArray = RealmHelper.retrieveTasks()
-            }
-        }
     }
 }
 
@@ -123,30 +115,65 @@ extension ToDoListViewController {
     
     func setTasksForUserFromFirebase() {
         
-        ref.child("tasks").child(currentUser).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("tasks").child(currentUser.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             // Get user value
-            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {
-                print(snapshot.value)
-                return
-            }
+            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {return}
             
             self.taskArray = []
             for tempTask in tempListOfTasks {
                 
-                let title = tempTask.1["title"] as! String
-                let descriptionText = tempTask.1["descriptionText"] as! String
-                //let dueDate = tempTask.1["expirationDate"] as! String
-                let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
-                self.taskArray.append(task)
+                
+                    let title = tempTask.1["title"] as! String
+                    let descriptionText = tempTask.1["description"] as! String
+                    //let dueDate = tempTask.1["dueDate"] as! String
+                    let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
+                    self.taskArray.append(task)
+                
             }
             
-            self.taskTableView.reloadData()
+            
             
             // ...
         }) { (error) in
             print(error.localizedDescription)
         }
-        
     }
     
+    func setCompletedTasksForUserFromFirebase() {
+        
+        ref.child("completedTasks").child(currentUser.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {return}
+            self.completedTaskArray = []
+            for tempTask in tempListOfTasks {
+                
+                    let title = tempTask.1["title"] as! String
+                    let descriptionText = tempTask.1["description"] as! String
+                    //let dueDate = tempTask.1["dueDate"] as! String
+                    let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
+                    self.completedTaskArray.append(task)
+                    
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func removeTaskFromFirebase(taskIndex: Int) {
+        self.taskArray.removeAtIndex(taskIndex)
+        self.ref.child("tasks").child(currentUser.username).setValue(nil)
+        for task in self.taskArray {
+            self.ref.child("tasks").child(currentUser.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText, "dueDate": String(task.dueDate)])
+        }
+    }
+
+    func completedTask(taskIndex: Int) {
+        self.completedTaskArray.append(taskArray[taskIndex])
+        removeTaskFromFirebase(taskIndex)
+        self.ref.child("completedTasks").child(currentUser.username).setValue(nil)
+        for task in self.completedTaskArray {
+            self.ref.child("completedTasks").child(currentUser.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText])
+        }
+    }
 }
