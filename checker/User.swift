@@ -11,6 +11,6 @@ class User: Object {
     
     dynamic var username: String!
     dynamic var password: String!
-    dynamic var buddy: User?
+    dynamic var buddy: String?
 
 }
