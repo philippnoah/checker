@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "checker/ToDoListViewController.swift"
-            timestampString = "491445188.130109"
+            timestampString = "491799633.865895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "ToDoListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "checker/ToDoListViewController.swift"
-            timestampString = "491445188.130109"
+            timestampString = "491799633.865895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "ToDoListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "checker/ToDoListViewController.swift"
-            timestampString = "491445188.130109"
+            timestampString = "491799633.865895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
             landmarkName = "ToDoListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "checker/ToDoListViewController.swift"
-            timestampString = "491445188.130109"
+            timestampString = "491799633.865895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "261"
+            endingLineNumber = "261"
             landmarkName = "ToDoListViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -105,13 +105,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491524300.404413"
+            filePath = "checker/ComplimentViewController.swift"
+            timestampString = "491788434.413135"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
-            landmarkName = "setTasksForBuddyFromFirebase(_:)"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "removeTaskFromCompletedTasks()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,109 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491524300.404413"
+            filePath = "checker/ComplimentViewController.swift"
+            timestampString = "491788447.407393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "setTasksForBuddyFromFirebase(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491524327.487793"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "setTasksForBuddyFromFirebase(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "checker.BuddiesViewController.setTasksForBuddyFromFirebase (Swift.String) -&gt; ()"
-                  moduleName = "checker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/philippeibl/Desktop/xcode_projects/checker/checker/BuddiesViewController.swift"
-                  timestampString = "491525644.671934"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "124"
-                  endingLineNumber = "124"
-                  offsetFromSymbolStart = "32">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "checker.BuddiesViewController.(setTasksForBuddyFromFirebase (Swift.String) -&gt; ()).(closure #1)"
-                  moduleName = "checker"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/philippeibl/Desktop/xcode_projects/checker/checker/BuddiesViewController.swift"
-                  timestampString = "491525644.672093"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "126"
-                  endingLineNumber = "126"
-                  offsetFromSymbolStart = "32">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491524379.063872"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "BuddiesViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491524404.444779"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "getUsersWithoutBuddyAndAssignBuddiesIfNecessary()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "checker/BuddiesViewController.swift"
-            timestampString = "491525607.256912"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "setTasksForBuddyFromFirebase(_:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

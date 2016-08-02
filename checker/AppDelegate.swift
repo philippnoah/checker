@@ -19,6 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FIRApp.configure()
         
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        var initialViewController = UIViewController()
+        if RealmHelper.checkForUser() == 0 {
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController")
+        } else {
+            initialViewController = storyboard.instantiateViewControllerWithIdentifier("tabBarController")
+        }
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
         
         return true
     }

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CCMPopup.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MGSwipeTableCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>08ED08622852565D675E0AEB6BBC25C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4E1263BFF45F6446CF3DE29AE234C893</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>874867042DA21A4714BF6F53C2C4191B</key>
+		<key>5F8F9132A38A82880A65BCDBDE584BBE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>897FE6C9C4E9DEB4FCDE6246835361D5</key>
+		<key>ED7449DEF0D58F92A8F62D2DB7CC6559</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC12DB8474B8C1DB8B314BE48411C307</key>
+		<key>F8AB9FF229845F333B0E40E26107A8B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

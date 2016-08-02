@@ -28,21 +28,44 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
+        self.setUpUI()
+        self.taskTableView.tableFooterView = UIView(frame: CGRectZero)
         setTasksForUserFromFirebase()
         setCompletedTasksForUserFromFirebase()
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = true
+        super.viewWillAppear(true)
+        navigationController?.navigationBarHidden = false
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        self.navigationController?.navigationBarHidden = false
+    func setUpUI() {
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSForegroundColorAttributeName: UIColor.blackColor(),
+             NSFontAttributeName: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!]
+        
+        self.taskTableView.separatorColor = UIColor.init(red: 240, green: 240, blue: 240, alpha: 240)
+        
     }
-    
 }
 
 extension ToDoListViewController {
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView(frame: CGRectZero)
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView(frame: CGRectZero)
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -56,6 +79,7 @@ extension ToDoListViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         var cell = self.taskTableView.dequeueReusableCellWithIdentifier("taskCell") as! MGSwipeTableCell!
+        
         if cell == nil
         {
             cell = MGSwipeTableCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "taskCell")
@@ -115,7 +139,7 @@ extension ToDoListViewController {
     
     func setTasksForUserFromFirebase() {
         
-        ref.child("tasks").child(currentUser.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("tasks").child(currentUser!.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             // Get user value
             guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {return}
             
@@ -141,7 +165,7 @@ extension ToDoListViewController {
     
     func setCompletedTasksForUserFromFirebase() {
         
-        ref.child("completedTasks").child(currentUser.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+        ref.child("completedTasks").child(currentUser!.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             
             guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {return}
             self.completedTaskArray = []
@@ -162,18 +186,18 @@ extension ToDoListViewController {
     
     func removeTaskFromFirebase(taskIndex: Int) {
         self.taskArray.removeAtIndex(taskIndex)
-        self.ref.child("tasks").child(currentUser.username).setValue(nil)
+        self.ref.child("tasks").child(currentUser!.username).setValue(nil)
         for task in self.taskArray {
-            self.ref.child("tasks").child(currentUser.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText, "dueDate": String(task.dueDate)])
+            self.ref.child("tasks").child(currentUser!.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText, "dueDate": String(task.dueDate)])
         }
     }
 
     func completedTask(taskIndex: Int) {
         self.completedTaskArray.append(taskArray[taskIndex])
         removeTaskFromFirebase(taskIndex)
-        self.ref.child("completedTasks").child(currentUser.username).setValue(nil)
+        self.ref.child("completedTasks").child(currentUser!.username).setValue(nil)
         for task in self.completedTaskArray {
-            self.ref.child("completedTasks").child(currentUser.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText])
+            self.ref.child("completedTasks").child(currentUser!.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText])
         }
     }
 }

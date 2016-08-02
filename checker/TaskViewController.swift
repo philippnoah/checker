@@ -49,7 +49,7 @@ extension TaskViewController {
     func saveTaskToFirebase() {
     
         if isNewTask {
-            self.ref.child("tasks").child(currentUser.username).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
+            self.ref.child("tasks").child(currentUser!.username).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
         } else {
             
         }

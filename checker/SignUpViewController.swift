@@ -22,6 +22,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
+        self.getUsers()
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
@@ -42,19 +43,44 @@ class SignUpViewController: UIViewController {
     
     func validation() -> Bool {
         if usernameTextField.text != "" && passwordTextField.text != "" {
-            if compareWithDataBase() {
+            if compareWithFirebaseData() {
                 return true
             }
         }
         return false
     }
     
-    func compareWithDataBase() -> Bool {
+    func compareWithFirebaseData() -> Bool {
         for user in listOfUsers {
             if usernameTextField.text! == user.username && passwordTextField.text! == user.password {
                 return true
             }
         }
         return false
+    }
+}
+
+extension SignUpViewController {
+    func getUsers() {
+        
+        ref.child("users").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            //Get users
+            guard let tempListOfUsers = snapshot.value! as? [String: AnyObject] else {return}
+            
+            for tempUser in tempListOfUsers {
+                let user = User()
+                user.username = tempUser.1["username"] as! String
+                user.password = tempUser.1["password"] as! String
+                user.buddy = tempUser.1["buddy"] as? String
+                self.listOfUsers.append(user)
+                
+            }
+            
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
     }
 }

@@ -11,6 +11,11 @@ import RealmSwift
 
 class RealmHelper {
     
+    static func checkForUser() -> Int {
+        let realm = try! Realm()
+        return Array(realm.objects(User)).count
+    }
+    
     static func login(user: User) {
         let realm = try! Realm()
         try! realm.write() {
@@ -25,7 +30,7 @@ class RealmHelper {
         }
     }
     
-    static func getUser() -> User {
+    static func getUser() -> User? {
         let realm = try! Realm()
         return Array(realm.objects(User))[0]
     }

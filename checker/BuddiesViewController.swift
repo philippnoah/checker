@@ -8,11 +8,17 @@
 
 import UIKit
 import Firebase
+import CCMPopup
 
 class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet var buddiesTitelLabel: UILabel!
+    @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var buddyTasksListTableView: UITableView!
+
+    @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
+        self.buddyTasksListTableView.reloadData()
+    }
     
     var ref = FIRDatabaseReference()
     var currentUser = User()
@@ -23,29 +29,58 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.buddyTasksListTableView.reloadData()
         }
     }
+    var complimentsArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
-        self.currentUser = RealmHelper.getUser()
+        self.currentUser = RealmHelper.getUser()!
         self.getUsersWithoutBuddyAndAssignBuddiesIfNecessary()
-}
+        
+        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        
+        self.buddyTasksListTableView.tableFooterView = UIView(frame: CGRectZero)
+        self.buddyTasksListTableView.separatorColor = UIColor.init(red: 240, green: 240, blue: 240, alpha: 240)
+    }
 }
 
 extension BuddiesViewController {
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return UIView(frame: CGRectZero)
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView(frame: CGRectZero)
+    }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return buddyTaskArray.count
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return buddyTaskArray.count
+        } else {
+            return complimentsArray.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyTaskCell
-        cell.buddyTaskLabel.text = self.buddyTaskArray[indexPath.row].title
-        
+        if segmentedControl.selectedSegmentIndex == 0 {
+            cell.buddyTaskLabel.text = self.buddyTaskArray[indexPath.row].title
+        } else {
+            cell.buddyTaskLabel.text = self.complimentsArray[indexPath.row]
+        }
         return cell
     }
 }
@@ -56,6 +91,7 @@ extension BuddiesViewController {
         
         if self.currentUser.buddy != nil {
             setTasksForBuddyFromFirebase(self.currentUser.buddy!)
+            setCompliments()
             return
         }
         
@@ -84,6 +120,25 @@ extension BuddiesViewController {
         }) { (error) in
             print(error.localizedDescription)
         }
+    }
+    
+    func setCompliments() {
+        
+        ref.child("compliments").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            //Get users
+            guard let tempListOfCompliments = snapshot.value! as? [String: AnyObject] else {return}
+            
+            for tempCompliment in tempListOfCompliments {
+                if tempCompliment.1["toUser"] as! String == self.currentUser.username! {
+                    self.complimentsArray.append(tempCompliment.1["compliment"] as! String)
+                }
+            }
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+
     }
     
     func assignBuddies() {
@@ -135,12 +190,36 @@ extension BuddiesViewController {
                 self.buddyTaskArray.append(task)
                 
             }
-            print(self.buddyTaskArray.count)
             
             
             // ...
         }) { (error) in
             print(error.localizedDescription)
+        }
+    }
+}
+
+extension BuddiesViewController {
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue is CCMPopupSegue) {
+            let popupSegue: CCMPopupSegue = (segue as! CCMPopupSegue)
+            popupSegue.destinationBounds = CGRectMake(0, 0, 300, 300)
+            popupSegue.backgroundViewColor = UIColor.blackColor()
+            popupSegue.backgroundViewAlpha = 0.3
+            popupSegue.backgroundBlurRadius = 15
+            popupSegue.dismissableByTouchingBackground = true
+            let complimentViewController = segue.destinationViewController as! ComplimentViewController
+            complimentViewController.taskToDelete = self.buddyTaskArray[self.buddyTasksListTableView.indexPathForSelectedRow!.row].title
+            complimentViewController.indexForTaskToDelete = self.buddyTasksListTableView.indexPathForSelectedRow!.row
         }
     }
     

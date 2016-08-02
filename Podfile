@@ -9,6 +9,7 @@ target 'checker' do
   pod 'Firebase/Database'
   pod ‘Realm‘
   pod ‘RealmSwift’
+  pod 'CCMPopup'
   pod 'MGSwipeTableCell'
 
 end

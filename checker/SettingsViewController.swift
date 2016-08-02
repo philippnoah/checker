@@ -19,6 +19,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.settingsTableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -41,6 +42,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         case 2:
             RealmHelper.logout()
             self.dismissViewControllerAnimated(true, completion: nil)
+            navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            
         default:
             print("")
         }
