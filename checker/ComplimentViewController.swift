@@ -22,8 +22,7 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var ref = FIRDatabaseReference()
     var currentUser: User!
-    var taskToDelete: String!
-    var indexForTaskToDelete: Int!
+    weak var buddiesViewController: BuddiesViewController!
     var complimentsArray = ["Good job!", "Well done!", "Gotta catch'em all!"]
     
     override func viewDidLoad() {
@@ -39,7 +38,7 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     func sendCompliment() {
-        self.ref.child("compliments").childByAutoId().setValue(["compliment": self.complimentPickerView.selectedRowInComponent(0).description, "toUser": currentUser.buddy!])
+        self.ref.child("compliments").childByAutoId().setValue(["compliment": self.complimentsArray[complimentPickerView.selectedRowInComponent(0)], "toUser": currentUser.buddy!])
     }
     
     func removeTaskFromCompletedTasks() {
@@ -50,11 +49,13 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
             
             for tempTask in tempListOfTasks {
                                 
-                if tempTask.1["title"] as! String == self.taskToDelete {
+                if tempTask.1["title"] as! String == self.buddiesViewController.buddyTaskArray[self.buddiesViewController.buddyTasksListTableView.indexPathForSelectedRow!.row].title {
                 
                     self.ref.child("completedTasks").child(self.currentUser.buddy!)
                         .child(tempTask.0)
                         .setValue(nil)
+                    
+                    self.buddiesViewController.buddyTaskArray.removeAtIndex(self.buddiesViewController.buddyTasksListTableView.indexPathForSelectedRow!.row)
                     
                 }
             }
@@ -79,14 +80,5 @@ extension ComplimentViewController {
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         
         return NSAttributedString(string: complimentsArray[row])
-    }
-}
-
-extension ComplimentViewController {
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let buddiesViewController = segue.destinationViewController as! BuddiesViewController
-        buddiesViewController.buddyTaskArray.removeAtIndex(self.indexForTaskToDelete)
-        buddiesViewController.buddyTasksListTableView.reloadData()
     }
 }

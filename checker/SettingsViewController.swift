@@ -43,6 +43,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             RealmHelper.logout()
             self.dismissViewControllerAnimated(true, completion: nil)
             navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            tabBarController?.dismissViewControllerAnimated(true, completion: nil)
             
         default:
             print("")

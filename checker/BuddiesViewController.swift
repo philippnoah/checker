@@ -42,6 +42,11 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.buddyTasksListTableView.tableFooterView = UIView(frame: CGRectZero)
         self.buddyTasksListTableView.separatorColor = UIColor.init(red: 240, green: 240, blue: 240, alpha: 240)
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.buddyTasksListTableView.reloadData()
+    }
 }
 
 extension BuddiesViewController {
@@ -68,7 +73,7 @@ extension BuddiesViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
-            return buddyTaskArray.count
+            return self.buddyTaskArray.count
         } else {
             return complimentsArray.count
         }
@@ -190,6 +195,7 @@ extension BuddiesViewController {
                 self.buddyTaskArray.append(task)
                 
             }
+            self.buddyTasksListTableView.reloadData()
             
             
             // ...
@@ -218,8 +224,7 @@ extension BuddiesViewController {
             popupSegue.backgroundBlurRadius = 15
             popupSegue.dismissableByTouchingBackground = true
             let complimentViewController = segue.destinationViewController as! ComplimentViewController
-            complimentViewController.taskToDelete = self.buddyTaskArray[self.buddyTasksListTableView.indexPathForSelectedRow!.row].title
-            complimentViewController.indexForTaskToDelete = self.buddyTasksListTableView.indexPathForSelectedRow!.row
+            complimentViewController.buddiesViewController = self
         }
     }
     
