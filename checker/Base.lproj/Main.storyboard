@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Buddies-->
+        <!--BuddiesViewController-->
         <scene sceneID="QM8-sC-MNd">
             <objects>
-                <viewController title="Buddies" id="LrR-hb-CUP" customClass="BuddiesViewController" customModule="checker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="BuddiesViewController" id="LrR-hb-CUP" customClass="BuddiesViewController" customModule="checker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vZt-Mf-qV6"/>
                         <viewControllerLayoutGuide type="bottom" id="zZI-Aa-BBu"/>
@@ -24,7 +24,7 @@
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="buddyCell" id="2HJ-ot-JBP" customClass="BuddyTaskCell" customModule="checker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buddyCell" id="2HJ-ot-JBP" customClass="BuddyTaskCell" customModule="checker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2HJ-ot-JBP" id="Fz8-m2-5md">

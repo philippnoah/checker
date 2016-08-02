@@ -14,7 +14,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
-    var currentUser: User? = User()
+    var currentUser: User?
     var listOfUsers: [User] = []
     var ref = FIRDatabaseReference()
     
@@ -27,8 +27,8 @@ class LoginViewController: UIViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "login" && validation() {
             RealmHelper.logout()
-            currentUser!.username = usernameTextField.text!
-            currentUser!.password = passwordTextField.text!
+            currentUser?.username = usernameTextField.text!
+            currentUser?.password = passwordTextField.text!
             RealmHelper.login(currentUser!)
             return true
             
@@ -42,7 +42,9 @@ class LoginViewController: UIViewController {
         if usernameTextField.text != "" && passwordTextField.text != "" {
             for user in listOfUsers {
                 if user.username == self.usernameTextField.text && user.password == self.passwordTextField.text {
-                    self.currentUser!.buddy = user.buddy
+                    self.currentUser = nil
+                    self.currentUser = User()
+                    self.currentUser?.buddy = user.buddy
                     return true
                 }
             }

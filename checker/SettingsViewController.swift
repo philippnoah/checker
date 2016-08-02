@@ -41,12 +41,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         switch indexPath.row {
         case 2:
             RealmHelper.logout()
-            self.dismissViewControllerAnimated(true, completion: nil)
             navigationController?.dismissViewControllerAnimated(true, completion: nil)
             tabBarController?.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
             
         default:
-            print("")
+            print("defualt")
         }
     }
 }

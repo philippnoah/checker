@@ -57,6 +57,8 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
                     
                     self.buddiesViewController.buddyTaskArray.removeAtIndex(self.buddiesViewController.buddyTasksListTableView.indexPathForSelectedRow!.row)
                     
+                    return
+                    
                 }
             }
             
