@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FIRApp.configure()
         
+        // Tab bar controller tint
+        UITabBar.appearance().tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         var initialViewController = UIViewController()

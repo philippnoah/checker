@@ -14,6 +14,11 @@ class SignUpViewController: UIViewController {
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBAction func unwindToLoginViewController(segue: UIStoryboardSegue) { }
+    @IBOutlet var confirmPasswordTextField: UITextField!
+    @IBOutlet var createAccountButton: UIButton!
+    @IBAction func goToLogin(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 
     var currentUser: User!
     var listOfUsers: [User] = []
@@ -23,6 +28,45 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         self.getUsers()
+        if RealmHelper.checkForUser() != 0 { RealmHelper.logout() }
+
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        confirmPasswordTextField.resignFirstResponder()
+        
+        let usernamePaddingView: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        usernameTextField.leftView = usernamePaddingView
+        usernameTextField.leftViewMode = .Always
+        
+        let passwordPaddingView: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        passwordTextField.leftView = passwordPaddingView
+        passwordTextField.leftViewMode = .Always
+        
+        let confirmPasswordPaddingView: UIView = UIView(frame: CGRectMake(0, 0, 10 ,0))
+        confirmPasswordTextField.leftView = confirmPasswordPaddingView
+        confirmPasswordTextField.leftViewMode = .Always
+        
+        usernameTextField.layer.borderWidth = 1
+        usernameTextField.layer.borderColor = UIColor.init(red:0.75, green:0.75, blue:0.75, alpha:1.0).CGColor
+        
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.borderColor = UIColor.init(red:0.75, green:0.75, blue:0.75, alpha:1.0).CGColor
+        
+        confirmPasswordTextField.layer.borderWidth = 1
+        confirmPasswordTextField.layer.borderColor = UIColor.init(red:0.75, green:0.75, blue:0.75, alpha:1.0).CGColor
+        
+        let highlightedImage: UIImage = UIImage(named: "loginButton.png")!
+        let highlightedImageInsets: UIEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        let stretchableHighlightedImage: UIImage = highlightedImage.resizableImageWithCapInsets(highlightedImageInsets)
+        createAccountButton.setBackgroundImage(stretchableHighlightedImage, forState: .Normal)
+        createAccountButton.setTitleColor(.darkGrayColor(), forState: .Selected)
+        createAccountButton.setTitleColor(.darkGrayColor(), forState: .Focused)
+        createAccountButton.setTitleColor(.darkGrayColor(), forState: .Highlighted)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+        view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

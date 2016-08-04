@@ -14,12 +14,13 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func unwindToToDoListViewController(segue: UIStoryboardSegue) { }
     @IBOutlet var settingsTableView: UITableView!
     
-    var taskArray = ["Sync with iCloud", "Chat", "Logout"]
+    var taskArray = ["Logout"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.settingsTableView.tableFooterView = UIView(frame: CGRectZero)
+        self.settingsTableView.contentInset = UIEdgeInsetsMake(1, 0, 0, 0)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -39,10 +40,9 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch indexPath.row {
-        case 2:
-            RealmHelper.logout()
-            navigationController?.dismissViewControllerAnimated(true, completion: nil)
-            tabBarController?.dismissViewControllerAnimated(true, completion: nil)
+        case 0:
+            
+            tabBarController!.dismissViewControllerAnimated(true, completion: nil)
             self.dismissViewControllerAnimated(true, completion: nil)
             
         default:

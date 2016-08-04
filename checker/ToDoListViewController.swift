@@ -15,6 +15,7 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var toDoListTitleLabel: UILabel!
     @IBOutlet var taskTableView: UITableView!
     @IBAction func unwindToToDoListViewController(segue: UIStoryboardSegue) { }
+    @IBOutlet var addButton: UIBarButtonItem!
     
     var ref = FIRDatabaseReference()
     var currentUser = RealmHelper.getUser()
@@ -36,16 +37,21 @@ class ToDoListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.navigationBarHidden = false
+        self.navigationController?.navigationBarHidden = true
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.navigationBarHidden = false
     }
     
     func setUpUI() {
-        self.navigationController?.navigationBar.titleTextAttributes =
-            [NSForegroundColorAttributeName: UIColor.blackColor(),
-             NSFontAttributeName: UIFont(name: "HelveticaNeue-UltraLight", size: 30)!]
         
-        self.taskTableView.separatorColor = UIColor.init(red: 240, green: 240, blue: 240, alpha: 240)
-        
+        self.taskTableView.layoutMargins = UIEdgeInsetsZero
+        self.taskTableView.separatorInset = UIEdgeInsetsZero
+        self.addButton.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
     }
 }
 

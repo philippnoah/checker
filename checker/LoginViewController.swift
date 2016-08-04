@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
+    @IBOutlet var loginButton: UIButton!
     
     var currentUser: User?
     var listOfUsers: [User] = []
@@ -22,11 +23,41 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         self.getUsers()
+        if RealmHelper.checkForUser() != 0 { RealmHelper.logout() }
+
+        usernameTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
+        
+        let usernamePaddingView: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        usernameTextField.leftView = usernamePaddingView
+        usernameTextField.leftViewMode = .Always
+        
+        let passwordPaddingView: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        passwordTextField.leftView = passwordPaddingView
+        passwordTextField.leftViewMode = .Always
+        
+        usernameTextField.layer.borderWidth = 1
+        usernameTextField.layer.borderColor = UIColor.init(red:0.75, green:0.75, blue:0.75, alpha:1.0).CGColor
+        
+        passwordTextField.layer.borderWidth = 1
+        passwordTextField.layer.borderColor = UIColor.init(red:0.75, green:0.75, blue:0.75, alpha:1.0).CGColor
+
+        let highlightedImage: UIImage = UIImage(named: "loginButton.png")!
+        let highlightedImageInsets: UIEdgeInsets = UIEdgeInsetsMake(5, 5, 5, 5)
+        let stretchableHighlightedImage: UIImage = highlightedImage.resizableImageWithCapInsets(highlightedImageInsets)
+        loginButton.setBackgroundImage(stretchableHighlightedImage, forState: .Normal)
+        loginButton.setTitleColor(.darkGrayColor(), forState: .Selected)
+        loginButton.setTitleColor(.darkGrayColor(), forState: .Focused)
+        loginButton.setTitleColor(.darkGrayColor(), forState: .Highlighted)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?){
+        view.endEditing(true)
+        super.touchesBegan(touches, withEvent: event)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "login" && validation() {
-            RealmHelper.logout()
             currentUser?.username = usernameTextField.text!
             currentUser?.password = passwordTextField.text!
             RealmHelper.login(currentUser!)

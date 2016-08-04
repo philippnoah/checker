@@ -38,9 +38,9 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.getUsersWithoutBuddyAndAssignBuddiesIfNecessary()
         
         self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
-        
+        self.segmentedControl.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
+        //self.segmentedControl.backgroundColor
         self.buddyTasksListTableView.tableFooterView = UIView(frame: CGRectZero)
-        self.buddyTasksListTableView.separatorColor = UIColor.init(red: 240, green: 240, blue: 240, alpha: 240)
     }
     
     override func viewWillAppear(animated: Bool) {

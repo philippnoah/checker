@@ -12,6 +12,7 @@ import CCMPopup
 import Firebase
 
 class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     @IBOutlet var complimentTitleLabel: UILabel!
     @IBOutlet var complimentPickerView: UIPickerView!
     @IBAction func sendComplimentBuddy(sender: UIButton) {

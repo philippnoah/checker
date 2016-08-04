@@ -26,8 +26,13 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
-        self.navigationController?.navigationBarHidden = false
         textFieldAndtextViewSetUp()
+        
+        navigationController?.navigationBar.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
+        
+        let titleTextFieldPadding: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
+        taskTitleTextField.leftView = titleTextFieldPadding
+        taskTitleTextField.leftViewMode = .Always
     }
 }
 
