@@ -15,11 +15,8 @@ class Task {
     var dueDate: NSDate = NSDate()
     
     init(title: String, descriptionText: String, dueDate: NSDate) {
-        
         self.title = title
         self.descriptionText = descriptionText
         self.dueDate = dueDate
-        
     }
-    
 }

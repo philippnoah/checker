@@ -99,7 +99,7 @@ extension ToDoListViewController {
             return true
         })
         
-        let rightSwipeButton = MGSwipeButton(title: "Done", backgroundColor: UIColor.greenColor(), callback: {
+        let rightSwipeButton = MGSwipeButton(title: "Done", backgroundColor: UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             self.completedTask(indexPath.row)
             return true
@@ -113,8 +113,16 @@ extension ToDoListViewController {
         cell.rightButtons = [rightSwipeButton]
         cell.rightSwipeSettings.transition = MGSwipeTransition.Drag
         
+        let emptyBackgroundCellView = UIView()
+        emptyBackgroundCellView.backgroundColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:0.5)
+        cell.selectedBackgroundView = emptyBackgroundCellView
+        
         return cell
         
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 }
 
@@ -127,15 +135,16 @@ extension ToDoListViewController {
             let indexPath = taskTableView.indexPathForSelectedRow!
             taskViewController.taskToEdit = self.taskArray[indexPath.row]
             taskViewController.taskArray = self.taskArray
+            taskViewController.indexForTaskToEdit = indexPath.row
             
         } else if segue.identifier == "newTask" {
             
-                        let taskViewController = segue.destinationViewController as! TaskViewController
-                        let newTask = Task(title: "", descriptionText: "Description...", dueDate: NSDate())
-            
-                        taskViewController.isNewTask = true
-                        taskViewController.taskToEdit = newTask
-                        taskViewController.taskArray = self.taskArray
+            let taskViewController = segue.destinationViewController as! TaskViewController
+            let newTask = Task(title: "", descriptionText: "Description...", dueDate: NSDate())
+
+            taskViewController.isNewTask = true
+            taskViewController.taskToEdit = newTask
+            taskViewController.taskArray = self.taskArray
             
         }
     }
@@ -153,10 +162,14 @@ extension ToDoListViewController {
             for tempTask in tempListOfTasks {
                 
                 
-                    let title = tempTask.1["title"] as! String
-                    let descriptionText = tempTask.1["description"] as! String
-                    //let dueDate = tempTask.1["dueDate"] as! String
-                    let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
+                let title = tempTask.1["title"] as! String
+                let descriptionText = tempTask.1["description"] as! String
+                
+                let dueDate = tempTask.1["dueDate"] as! String
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss' '+0000"
+                
+                let task = Task(title: title, descriptionText: descriptionText, dueDate: dateFormatter.dateFromString(dueDate)!)
                     self.taskArray.append(task)
                 
             }
@@ -177,10 +190,14 @@ extension ToDoListViewController {
             self.completedTaskArray = []
             for tempTask in tempListOfTasks {
                 
-                    let title = tempTask.1["title"] as! String
-                    let descriptionText = tempTask.1["description"] as! String
-                    //let dueDate = tempTask.1["dueDate"] as! String
-                    let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
+                let title = tempTask.1["title"] as! String
+                let descriptionText = tempTask.1["description"] as! String
+                
+                let dueDate = tempTask.1["dueDate"] as! String
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd' 'HH:mm:ss' '+0000"
+                
+                let task = Task(title: title, descriptionText: descriptionText, dueDate: dateFormatter.dateFromString(dueDate)!)
                     self.completedTaskArray.append(task)
                     
             }
@@ -203,7 +220,7 @@ extension ToDoListViewController {
         removeTaskFromFirebase(taskIndex)
         self.ref.child("completedTasks").child(currentUser!.username).setValue(nil)
         for task in self.completedTaskArray {
-            self.ref.child("completedTasks").child(currentUser!.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText])
+        self.ref.child("completedTasks").child(currentUser!.username).childByAutoId().setValue(["title": task.title, "description": task.descriptionText])
         }
     }
 }

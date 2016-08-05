@@ -35,7 +35,7 @@ class RealmHelper {
         return Array(realm.objects(User))[0]
     }
     
-    static func setBuddy(user: User, setBuddy buddy: String) {
+    static func setBuddy(user: User, setBuddy buddy: String?) {
         let realm = try! Realm()
         try! realm.write() {
             user.buddy = buddy

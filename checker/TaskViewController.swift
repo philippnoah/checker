@@ -16,6 +16,8 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet var taskTitleTextField: UITextField!
     @IBOutlet var taskDescriptionTextField: UITextView!
     
+    var indexForTaskToEdit: Int!
+    var stringID: String!
     var taskArray: [Task] = []
     var taskToEdit: Task!
     var isNewTask = false
@@ -28,6 +30,7 @@ class TaskViewController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         self.ref = FIRDatabase.database().reference()
         textFieldAndtextViewSetUp()
         
+        setTasksForUserFromFirebase()
         navigationController?.navigationBar.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
         
         let titleTextFieldPadding: UIView = UIView(frame: CGRectMake(0, 0, 10, 0))
@@ -43,7 +46,7 @@ extension TaskViewController {
         }
         
         if identifier == "save" {
-            saveTaskToFirebase()
+            saveTask()
             return true
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -51,12 +54,24 @@ extension TaskViewController {
         }
     }
     
-    func saveTaskToFirebase() {
+    func saveTask() {
     
         if isNewTask {
-            self.ref.child("tasks").child(currentUser!.username).childByAutoId().setValue(["title": self.taskTitleTextField.text!, "description": self.taskDescriptionTextField.text!, "dueDate": String(self.taskExpirationDatePicker.date)])
-        } else {
+            self.ref.child("tasks").child(currentUser!.username).childByAutoId().setValue([
+                "title": self.taskTitleTextField.text!,
+                "description": self.taskDescriptionTextField.text!,
+                "dueDate": String(self.taskExpirationDatePicker.date)
+                ])
             
+                self.taskArray.append(Task(title: self.taskTitleTextField.text!, descriptionText: self.taskDescriptionTextField.text!, dueDate: self.taskExpirationDatePicker.date))
+        } else {
+            self.ref.child("tasks").child(currentUser!.username).child(self.stringID).setValue([
+                "title": self.taskTitleTextField.text!,
+                "description": self.taskDescriptionTextField.text!,
+                "dueDate": String(self.taskExpirationDatePicker.date)
+                ])
+            
+            self.taskArray[indexForTaskToEdit] = Task(title: self.taskTitleTextField.text!, descriptionText: self.taskDescriptionTextField.text!, dueDate: self.taskExpirationDatePicker.date)
         }
     }
     
@@ -64,11 +79,10 @@ extension TaskViewController {
         if segue.identifier == "save" {
             
             let toDoListViewController = segue.destinationViewController as! ToDoListViewController
-            self.taskArray.append(Task(title: self.taskTitleTextField.text!, descriptionText: self.taskDescriptionTextField.text!, dueDate: self.taskExpirationDatePicker.date))
             toDoListViewController.taskArray = self.taskArray
             toDoListViewController.taskTableView.reloadData()
         } else {
-        print(self)
+            print(self)
         }
     }
 }
@@ -104,5 +118,31 @@ extension TaskViewController {
         self.taskExpirationDatePicker.date = taskToEdit.dueDate
         self.taskTitleTextField.text = taskToEdit.title
         self.taskDescriptionTextField.text = taskToEdit.descriptionText
+    }
+}
+
+extension TaskViewController {
+    
+    func setTasksForUserFromFirebase() {
+        if isNewTask {return}
+        
+        ref.child("tasks").child(currentUser!.username).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            // Get user value
+            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {return}
+            
+            for tempTask in tempListOfTasks {
+                
+                if tempTask.1["title"] as! String == self.taskToEdit.title {
+                    self.stringID = tempTask.0
+                }
+                
+            }
+            
+            
+            
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }

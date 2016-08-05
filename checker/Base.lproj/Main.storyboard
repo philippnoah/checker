@@ -363,7 +363,6 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="settingTitleLabel" destination="a0Z-OO-bMa" id="y4Z-eO-4Vm"/>
-                                            <segue destination="qLv-qj-eGy" kind="unwind" identifier="logout" unwindAction="unwindToToDoListViewController:" id="akR-PR-ADc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -397,7 +396,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zk-zA-UsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="qLv-qj-eGy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1466" y="939"/>
         </scene>
@@ -672,10 +670,36 @@
                                     <segue destination="4wX-GH-gAn" kind="show" identifier="createAccount" id="khh-n7-npc"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By pressing &quot;Creating Account&quot; you agree to Checker's  " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1m-Vl-dFG">
+                                <rect key="frame" x="20" y="448" width="296" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="05t-cA-30Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbF-Rz-lqH">
+                                <rect key="frame" x="541" y="448" width="39" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="39" id="zgH-yW-yaK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="Terms">
+                                    <color key="titleColor" red="0.30196078431372547" green="0.69803921568627447" blue="0.054901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="PUZ-Y2-Lt7" kind="custom" identifier="showTerms" customClass="CCMPopupSegue" id="uuK-rq-muh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="K1m-Vl-dFG" firstAttribute="leading" secondItem="G2P-Lp-Cec" secondAttribute="leading" id="0dL-vd-WHR"/>
                             <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="kHi-FT-QJK" secondAttribute="trailingMargin" id="0zZ-GC-ulA"/>
+                            <constraint firstItem="dbF-Rz-lqH" firstAttribute="centerY" secondItem="K1m-Vl-dFG" secondAttribute="centerY" id="10T-1M-tkv"/>
+                            <constraint firstItem="K1m-Vl-dFG" firstAttribute="top" secondItem="G2P-Lp-Cec" secondAttribute="bottom" constant="8" symbolic="YES" id="32f-rx-MkF"/>
+                            <constraint firstItem="dbF-Rz-lqH" firstAttribute="top" secondItem="G2P-Lp-Cec" secondAttribute="bottom" constant="8" id="3Lb-BS-JHC"/>
                             <constraint firstItem="co8-g9-cXV" firstAttribute="centerY" secondItem="kHi-FT-QJK" secondAttribute="centerY" id="6Di-cz-bx7"/>
                             <constraint firstItem="JmO-cs-uBf" firstAttribute="bottom" secondItem="BHr-EM-gtc" secondAttribute="top" id="8wj-EZ-Q8j"/>
                             <constraint firstItem="BTq-17-cG6" firstAttribute="leading" secondItem="co8-g9-cXV" secondAttribute="leading" id="BhG-Ls-Eit"/>
@@ -687,6 +711,7 @@
                             <constraint firstItem="JmO-cs-uBf" firstAttribute="centerX" secondItem="JBS-eq-i3A" secondAttribute="centerX" id="Rhy-Ol-6ee"/>
                             <constraint firstItem="JmO-cs-uBf" firstAttribute="leading" secondItem="kHi-FT-QJK" secondAttribute="leading" id="Xgg-dW-sXn"/>
                             <constraint firstAttribute="bottom" secondItem="qiM-xv-Ebc" secondAttribute="bottom" constant="20" symbolic="YES" id="bqF-rO-14S"/>
+                            <constraint firstAttribute="trailing" secondItem="dbF-Rz-lqH" secondAttribute="trailing" constant="20" id="ewF-z6-Xk3"/>
                             <constraint firstItem="JBS-eq-i3A" firstAttribute="trailing" secondItem="co8-g9-cXV" secondAttribute="trailing" id="ez6-Tx-58h"/>
                             <constraint firstItem="BTq-17-cG6" firstAttribute="trailing" secondItem="co8-g9-cXV" secondAttribute="trailing" id="gcb-EI-SgB"/>
                             <constraint firstItem="G2P-Lp-Cec" firstAttribute="centerX" secondItem="qiM-xv-Ebc" secondAttribute="centerX" id="lzS-Oc-0mV"/>
@@ -699,6 +724,7 @@
                         <outlet property="confirmPasswordTextField" destination="BTq-17-cG6" id="L67-AY-kr7"/>
                         <outlet property="createAccountButton" destination="G2P-Lp-Cec" id="GrF-fr-qBM"/>
                         <outlet property="passwordTextField" destination="co8-g9-cXV" id="Wl6-0W-62g"/>
+                        <outlet property="termsButton" destination="dbF-Rz-lqH" id="bAE-HJ-gFQ"/>
                         <outlet property="usernameTextField" destination="JBS-eq-i3A" id="LPi-vN-yhy"/>
                     </connections>
                 </viewController>
@@ -706,6 +732,84 @@
                 <exit id="pgG-6M-TYf" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="710" y="-628"/>
+        </scene>
+        <!--Terms View Controller-->
+        <scene sceneID="qeP-JJ-7mG">
+            <objects>
+                <viewController id="PUZ-Y2-Lt7" customClass="TermsViewController" customModule="checker" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PCk-KN-n7s"/>
+                        <viewControllerLayoutGuide type="bottom" id="Lkj-8Z-LAf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kzm-2x-hCD">
+                        <rect key="frame" x="0.0" y="0.0" width="500" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aq2-TY-cuA">
+                                <rect key="frame" x="4" y="20" width="492" height="1176"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Privacy Policy of Checker
+     
+In order to receive information about your Personal Data, the purposes and the parties the Data is shared with, contact the Owner.
+Data Controller and Owner
+Types of Data collected
+The owner does not provide a list of Personal Data types collected.
+Other Personal Data collected may be described in other sections of this privacy policy or by dedicated explanation text contextually with the Data collection.
+The Personal Data may be freely provided by the User, or collected automatically when using this Application.
+Any use of Cookies - or of other tracking tools - by this Application or by the owners of third party services used by this Application, unless stated otherwise, serves to identify Users and remember their preferences, for the sole purpose of providing the service required by the User.
+Failure to provide certain Personal Data may make it impossible for this Application to provide its services.
+Users are responsible for any Personal Data of third parties obtained, published or shared through this Application and confirm that they have the third party's consent to provide the Data to the Owner.
+Mode and place of processing the Data
+Methods of processing
+The Data Controller processes the Data of Users in a proper manner and shall take appropriate security measures to prevent unauthorized access, disclosure, modification, or unauthorized destruction of the Data.
+The Data processing is carried out using computers and/or IT enabled tools, following organizational procedures and modes strictly related to the purposes indicated. In addition to the Data Controller, in some cases, the Data may be accessible to certain types of persons in charge, involved with the operation of the site (administration, sales, marketing, legal, system administration) or external parties (such as third party technical service providers, mail carriers, hosting providers, IT companies, communications agencies) appointed, if necessary, as Data Processors by the Owner. The updated list of these parties may be requested from the Data Controller at any time.
+Place
+The Data is processed at the Data Controller's operating offices and in any other places where the parties involved with the processing are located. For further information, please contact the Data Controller.
+Retention time
+The Data is kept for the time necessary to provide the service requested by the User, or stated by the purposes outlined in this document, and the User can always request that the Data Controller suspend or remove the data.
+Additional information about Data collection and processing
+Legal action
+The User's Personal Data may be used for legal purposes by the Data Controller, in Court or in the stages leading to possible legal action arising from improper use of this Application or the related services.
+The User declares to be aware that the Data Controller may be required to reveal personal data upon request of public authorities.
+Additional information about User's Personal Data
+In addition to the information contained in this privacy policy, this Application may provide the User with additional and contextual information concerning particular services or the collection and processing of Personal Data upon request.
+System logs and maintenance
+For operation and maintenance purposes, this Application and any third party services may collect files that record interaction with this Application (System logs) or use for this purpose other Personal Data (such as IP Address).
+Information not contained in this policy
+More details concerning the collection or processing of Personal Data may be requested from the Data Controller at any time. Please see the contact information at the beginning of this document.
+The rights of Users
+Users have the right, at any time, to know whether their Personal Data has been stored and can consult the Data Controller to learn about their contents and origin, to verify their accuracy or to ask for them to be supplemented, cancelled, updated or corrected, or for their transformation into anonymous format or to block any data held in violation of the law, as well as to oppose their treatment for any and all legitimate reasons. Requests should be sent to the Data Controller at the contact information set out above.
+This Application does not support “Do Not Track” requests.
+To determine whether any of the third party services it uses honor the “Do Not Track” requests, please read their privacy policies.
+Changes to this privacy policy
+The Data Controller reserves the right to make changes to this privacy policy at any time by giving notice to its Users on this page. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom. If a User objects to any of the changes to the Policy, the User must cease using this Application and can request that the Data Controller remove the Personal Data. Unless stated otherwise, the then-current privacy policy applies to all Personal Data the Data Controller has about Users.
+Information about this privacy policy
+The Data Controller is responsible for this privacy policy, prepared starting from the modules provided by Iubenda and hosted on Iubenda's servers.</mutableString>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aq2-TY-cuA" firstAttribute="leading" secondItem="Kzm-2x-hCD" secondAttribute="leadingMargin" constant="-19" id="7A5-ua-gEd"/>
+                            <constraint firstAttribute="trailing" secondItem="aq2-TY-cuA" secondAttribute="trailing" constant="4" id="I9U-eC-K6Q"/>
+                            <constraint firstItem="aq2-TY-cuA" firstAttribute="leading" secondItem="Kzm-2x-hCD" secondAttribute="leading" constant="4" id="QYs-e9-PWX"/>
+                            <constraint firstItem="Lkj-8Z-LAf" firstAttribute="top" secondItem="aq2-TY-cuA" secondAttribute="bottom" id="S5H-Vl-RgI"/>
+                            <constraint firstItem="aq2-TY-cuA" firstAttribute="top" secondItem="PCk-KN-n7s" secondAttribute="bottom" id="ftv-f6-OLk"/>
+                            <constraint firstItem="aq2-TY-cuA" firstAttribute="centerX" secondItem="Kzm-2x-hCD" secondAttribute="centerX" id="fwF-oM-xVX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7A5-ua-gEd"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="500" height="500"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D6P-sq-cRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="368" y="-1441"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="73Y-sT-jYm">

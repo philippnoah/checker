@@ -24,12 +24,13 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
     var ref = FIRDatabaseReference()
     var currentUser: User!
     weak var buddiesViewController: BuddiesViewController!
-    var complimentsArray = ["Good job!", "Well done!", "Gotta catch'em all!"]
+    var complimentsArray: [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         self.currentUser = RealmHelper.getUser()
+        self.setComplimentsForPickerView()
         self.view.backgroundColor = UIColor.whiteColor()
         self.view.layer.cornerRadius = 5
     }
@@ -69,6 +70,25 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
         }
         
     }
+    
+    
+    func setComplimentsForPickerView() {
+        
+        ref.child("complimentOptions").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
+            
+            guard let tempCompliments = snapshot.value! as? [String: AnyObject] else {return}
+            
+            for tempCompliment in tempCompliments {
+                
+                self.complimentsArray.append(tempCompliment.1["compliment"] as! String)
+                
+            }
+            // ...
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
 }
 
 extension ComplimentViewController {

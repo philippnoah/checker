@@ -8,9 +8,11 @@
 
 import UIKit
 import Firebase
+import CCMPopup
 
 class SignUpViewController: UIViewController {
     
+    @IBOutlet var termsButton: UIButton!
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBAction func unwindToLoginViewController(segue: UIStoryboardSegue) { }
@@ -81,6 +83,8 @@ class SignUpViewController: UIViewController {
         } else if identifier == "goToLogin" {
             self.dismissViewControllerAnimated(true, completion: nil)
             return true
+        } else if identifier == "showTerms" {
+            return true
         }
         return false
     }
@@ -126,5 +130,17 @@ extension SignUpViewController {
             print(error.localizedDescription)
         }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue is CCMPopupSegue) {
+            let popupSegue: CCMPopupSegue = (segue as! CCMPopupSegue)
+            popupSegue.destinationBounds = CGRectMake(0, 0, 350, 500)
+            popupSegue.backgroundViewColor = UIColor.blackColor()
+            popupSegue.backgroundViewAlpha = 0.3
+            popupSegue.backgroundBlurRadius = 15
+            popupSegue.dismissableByTouchingBackground = true
+
+        }
     }
 }

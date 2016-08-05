@@ -15,7 +15,6 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var buddiesTitelLabel: UILabel!
     @IBOutlet var segmentedControl: UISegmentedControl!
     @IBOutlet var buddyTasksListTableView: UITableView!
-
     @IBAction func segmentedControlValueChanged(sender: UISegmentedControl) {
         self.buddyTasksListTableView.reloadData()
     }
@@ -36,7 +35,6 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
         self.ref = FIRDatabase.database().reference()
         self.currentUser = RealmHelper.getUser()!
         self.getUsersWithoutBuddyAndAssignBuddiesIfNecessary()
-        
         self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
         self.segmentedControl.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
         //self.segmentedControl.backgroundColor
@@ -73,7 +71,7 @@ extension BuddiesViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
-            return self.buddyTaskArray.count
+            return LocalDataHelper.buddyTaskArray.count
         } else {
             return complimentsArray.count
         }
@@ -82,7 +80,8 @@ extension BuddiesViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyTaskCell
         if segmentedControl.selectedSegmentIndex == 0 {
-            cell.buddyTaskLabel.text = self.buddyTaskArray[indexPath.row].title
+            cell.buddyTaskLabel.text = LocalDataHelper.buddyTaskArray[indexPath.row].title
+            cell.detailTextLabel?.text = self.currentUser.buddy
         } else {
             cell.buddyTaskLabel.text = self.complimentsArray[indexPath.row]
         }
@@ -190,9 +189,9 @@ extension BuddiesViewController {
                 
                 let title = tempTask.1["title"] as! String
                 let descriptionText = tempTask.1["description"] as! String
-                //let dueDate = tempTask.1["dueDate"] as! String
+    
                 let task = Task(title: title, descriptionText: descriptionText, dueDate: NSDate())
-                self.buddyTaskArray.append(task)
+                LocalDataHelper.buddyTaskArray.append(task)
                 
             }
             self.buddyTasksListTableView.reloadData()

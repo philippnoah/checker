@@ -12,9 +12,10 @@
 		3336CC1A1D39B5E200934D9E /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC191D39B5E200934D9E /* SignUpViewController.swift */; };
 		3336CC1C1D39DDB600934D9E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3336CC1B1D39DDB600934D9E /* User.swift */; };
 		339DA58F1D4A7B01002B0A25 /* Compliment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339DA58E1D4A7B01002B0A25 /* Compliment.swift */; };
+		33B5A90D1D5418E00092CABF /* LocalDataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B5A90C1D5418E00092CABF /* LocalDataHelper.swift */; };
+		33B5A90F1D54236B0092CABF /* TermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B5A90E1D54236B0092CABF /* TermsViewController.swift */; };
 		33D2E42A1D4C36F8008BEC88 /* ComplimentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2E4291D4C36F8008BEC88 /* ComplimentViewController.swift */; };
 		33D2E42D1D4FE362008BEC88 /* UILongNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2E42C1D4FE362008BEC88 /* UILongNavigationBar.swift */; };
-		33D2E42F1D50577B008BEC88 /* TasksArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2E42E1D50577B008BEC88 /* TasksArray.swift */; };
 		33D2E4311D517192008BEC88 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D2E4301D517192008BEC88 /* NavigationController.swift */; };
 		33DEB4D81D359A4F00B800FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DEB4D71D359A4F00B800FB /* AppDelegate.swift */; };
 		33DEB4DA1D359A4F00B800FB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33DEB4D91D359A4F00B800FB /* ViewController.swift */; };
@@ -40,9 +41,10 @@
 		3336CC191D39B5E200934D9E /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		3336CC1B1D39DDB600934D9E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		339DA58E1D4A7B01002B0A25 /* Compliment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Compliment.swift; sourceTree = "<group>"; };
+		33B5A90C1D5418E00092CABF /* LocalDataHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDataHelper.swift; sourceTree = "<group>"; };
+		33B5A90E1D54236B0092CABF /* TermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsViewController.swift; sourceTree = "<group>"; };
 		33D2E4291D4C36F8008BEC88 /* ComplimentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplimentViewController.swift; sourceTree = "<group>"; };
 		33D2E42C1D4FE362008BEC88 /* UILongNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILongNavigationBar.swift; sourceTree = "<group>"; };
-		33D2E42E1D50577B008BEC88 /* TasksArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TasksArray.swift; sourceTree = "<group>"; };
 		33D2E4301D517192008BEC88 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		33DEB4D41D359A4F00B800FB /* checker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = checker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33DEB4D71D359A4F00B800FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				3336CC131D39726C00934D9E /* RealmHelper.swift */,
-				33D2E42E1D50577B008BEC88 /* TasksArray.swift */,
+				33B5A90C1D5418E00092CABF /* LocalDataHelper.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -146,6 +148,7 @@
 			children = (
 				3336CC191D39B5E200934D9E /* SignUpViewController.swift */,
 				3336CC171D39B3D200934D9E /* LoginViewController.swift */,
+				33B5A90E1D54236B0092CABF /* TermsViewController.swift */,
 				33DEB4EB1D359C5900B800FB /* ToDoListViewController.swift */,
 				33DEB51D1D36CDBD00B800FB /* TaskViewController.swift */,
 				33DEB4ED1D359FB300B800FB /* BuddiesViewController.swift */,
@@ -317,8 +320,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3336CC181D39B3D200934D9E /* LoginViewController.swift in Sources */,
+				33B5A90D1D5418E00092CABF /* LocalDataHelper.swift in Sources */,
 				33DEB4EA1D359BC500B800FB /* TabBarController.swift in Sources */,
-				33D2E42F1D50577B008BEC88 /* TasksArray.swift in Sources */,
 				3336CC141D39726C00934D9E /* RealmHelper.swift in Sources */,
 				33D2E42A1D4C36F8008BEC88 /* ComplimentViewController.swift in Sources */,
 				33DEB4F61D35A5EC00B800FB /* TaskCell.swift in Sources */,
@@ -329,6 +332,7 @@
 				33DEB5201D36D53E00B800FB /* Task.swift in Sources */,
 				33DEB4EE1D359FB300B800FB /* BuddiesViewController.swift in Sources */,
 				33DEB4DA1D359A4F00B800FB /* ViewController.swift in Sources */,
+				33B5A90F1D54236B0092CABF /* TermsViewController.swift in Sources */,
 				3336CC1A1D39B5E200934D9E /* SignUpViewController.swift in Sources */,
 				33DEB4D81D359A4F00B800FB /* AppDelegate.swift in Sources */,
 				33DEB51E1D36CDBD00B800FB /* TaskViewController.swift in Sources */,
