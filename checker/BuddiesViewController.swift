@@ -34,16 +34,20 @@ class BuddiesViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         self.ref = FIRDatabase.database().reference()
         self.currentUser = RealmHelper.getUser()!
+        self.buddyTaskArray = LocalDataHelper.buddyTaskArray
         self.getUsersWithoutBuddyAndAssignBuddiesIfNecessary()
-        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
-        self.segmentedControl.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
-        //self.segmentedControl.backgroundColor
-        self.buddyTasksListTableView.tableFooterView = UIView(frame: CGRectZero)
+        setUI()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.buddyTasksListTableView.reloadData()
+    }
+    
+    func setUI() {
+        self.navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        self.segmentedControl.tintColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:1.0)
+        self.buddyTasksListTableView.tableFooterView = UIView(frame: CGRectZero)
     }
 }
 
@@ -71,7 +75,7 @@ extension BuddiesViewController {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if segmentedControl.selectedSegmentIndex == 0 {
-            return LocalDataHelper.buddyTaskArray.count
+            return self.buddyTaskArray.count
         } else {
             return complimentsArray.count
         }
@@ -79,12 +83,30 @@ extension BuddiesViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("buddyCell", forIndexPath: indexPath) as! BuddyTaskCell
+        
         if segmentedControl.selectedSegmentIndex == 0 {
-            cell.buddyTaskLabel.text = LocalDataHelper.buddyTaskArray[indexPath.row].title
-            cell.detailTextLabel?.text = self.currentUser.buddy
-        } else {
-            cell.buddyTaskLabel.text = self.complimentsArray[indexPath.row]
+            cell.textLabel!.text = self.buddyTaskArray[indexPath.row].title
+            cell.detailTextLabel?.text = self.currentUser.buddy! + "'s task"
+            
+            if buddyTaskArray.count == 0 {
+                cell.textLabel!.text = "Your buddy has no tasks..."
+                cell.backgroundColor = UIColor(white:0.06, alpha:1.0)
+            }
+            
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            cell.textLabel!.text = self.complimentsArray[indexPath.row]
+            cell.detailTextLabel?.text = ""
+            cell.selectionStyle = .None
+            
+            if complimentsArray.count == 0 {
+                cell.textLabel!.text = "Complete tasks to receive compliments from your buddy."
+                cell.backgroundColor = UIColor(white:0.06, alpha:1.0)}
         }
+        
+        let emptyBackgroundCellView = UIView()
+        emptyBackgroundCellView.backgroundColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:0.5)
+        cell.selectedBackgroundView = emptyBackgroundCellView
+        
         return cell
     }
 }
@@ -182,9 +204,12 @@ extension BuddiesViewController {
         
         ref.child("completedTasks").child(buddy).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             // Get user value
-            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {print("nope");return}
+            guard let tempListOfTasks = snapshot.value! as? [String: AnyObject] else {
+                print("nope")
+                return
+            }
             
-            self.buddyTaskArray = []
+            LocalDataHelper.buddyTaskArray = []
             for tempTask in tempListOfTasks {
                 
                 let title = tempTask.1["title"] as! String
@@ -194,6 +219,7 @@ extension BuddiesViewController {
                 LocalDataHelper.buddyTaskArray.append(task)
                 
             }
+            self.buddyTaskArray = LocalDataHelper.buddyTaskArray
             self.buddyTasksListTableView.reloadData()
             
             

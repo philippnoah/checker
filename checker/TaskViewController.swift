@@ -102,7 +102,7 @@ extension TaskViewController {
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        let maxLength: Int = 16
+        let maxLength: Int = 25
         return textField.text!.characters.count + (string.characters.count - range.length) <= maxLength
     }
     

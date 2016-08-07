@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-    var currentUser: User!
+    var currentUser: User = User()
     var listOfUsers: [User] = []
     var ref = FIRDatabaseReference()
     
@@ -72,8 +72,7 @@ class SignUpViewController: UIViewController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == "signUp" && validation() {
-            
+        if identifier == "createAccount" && validation() {
             currentUser.username = usernameTextField.text!
             currentUser.password = passwordTextField.text!
             RealmHelper.logout()
@@ -100,11 +99,11 @@ class SignUpViewController: UIViewController {
     
     func compareWithFirebaseData() -> Bool {
         for user in listOfUsers {
-            if usernameTextField.text! == user.username && passwordTextField.text! == user.password {
-                return true
+            if usernameTextField.text! == user.username {
+                return false
             }
         }
-        return false
+        return true
     }
 }
 

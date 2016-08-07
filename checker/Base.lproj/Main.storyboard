@@ -35,30 +35,32 @@
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexBackgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buddyCell" id="2HJ-ot-JBP" customClass="BuddyTaskCell" customModule="checker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="buddyCell" textLabel="7of-kY-9XD" detailTextLabel="15f-Vi-jf6" style="IBUITableViewCellStyleValue1" id="2HJ-ot-JBP" customClass="BuddyTaskCell" customModule="checker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2HJ-ot-JBP" id="Fz8-m2-5md">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="buddy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hBO-M9-bDz">
-                                                    <rect key="frame" x="16" y="13" width="576" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7of-kY-9XD">
+                                                    <rect key="frame" x="15" y="12" width="32" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="15f-Vi-jf6">
+                                                    <rect key="frame" x="543" y="12" width="42" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="hBO-M9-bDz" firstAttribute="leading" secondItem="Fz8-m2-5md" secondAttribute="leadingMargin" constant="8" id="JUd-lC-oMi"/>
-                                                <constraint firstItem="hBO-M9-bDz" firstAttribute="trailing" secondItem="Fz8-m2-5md" secondAttribute="trailingMargin" id="aaG-Tl-MiV"/>
-                                                <constraint firstItem="hBO-M9-bDz" firstAttribute="centerY" secondItem="Fz8-m2-5md" secondAttribute="centerY" id="hqF-at-Dgp"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <edgeInsets key="layoutMargins" top="8" left="0.0" bottom="8" right="8"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
-                                            <outlet property="buddyTaskLabel" destination="hBO-M9-bDz" id="6zl-Mr-srE"/>
                                             <segue destination="xgO-t6-Wb5" kind="custom" identifier="presentComplimentPicker" customClass="CCMPopupSegue" id="Tyz-bs-4Hc"/>
                                         </connections>
                                     </tableViewCell>
@@ -79,7 +81,7 @@
                             <constraint firstItem="QAG-c4-TGK" firstAttribute="centerX" secondItem="QxB-EU-EDu" secondAttribute="centerX" id="qfN-af-HjV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="A5K-if-QzB"/>
+                    <tabBarItem key="tabBarItem" title="Buddy" image="buddysTabBarIcon" selectedImage="buddysTabBarIcon" id="A5K-if-QzB"/>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -276,7 +278,9 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ziL-5Q-8MU"/>
                                 </constraints>
-                                <state key="normal" title="Compliment your buddy"/>
+                                <state key="normal" title="Compliment your buddy">
+                                    <color key="titleColor" red="0.30196078431372547" green="0.69803921568627447" blue="0.055164125213843923" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="sendComplimentBuddy:" destination="xgO-t6-Wb5" eventType="touchUpInside" id="4q5-RQ-V2f"/>
                                 </connections>
@@ -317,11 +321,12 @@
                     <connections>
                         <outlet property="complimentPickerView" destination="DZc-9p-NDI" id="ipn-uB-pYh"/>
                         <outlet property="complimentTitleLabel" destination="pAf-mi-qRi" id="zIy-y6-ZDb"/>
+                        <outlet property="sendComplimentButton" destination="xrW-sf-fK1" id="NgI-FY-hC7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HZ7-Xz-0Th" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="939"/>
+            <point key="canvasLocation" x="388" y="1529"/>
         </scene>
         <!--Settings-->
         <scene sceneID="9xh-2y-wMM">
@@ -335,35 +340,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gro-U0-Tmo">
+                                <rect key="frame" x="0.0" y="33" width="600" height="35"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R8K-dM-XEY">
                                 <rect key="frame" x="0.0" y="80" width="600" height="471"/>
                                 <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" id="JNc-Ki-PtI" customClass="SettingCell" customModule="checker" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="settingCell" textLabel="98t-sU-0rS" detailTextLabel="wVe-Nk-Mjw" style="IBUITableViewCellStyleValue1" id="JNc-Ki-PtI" customClass="SettingCell" customModule="checker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JNc-Ki-PtI" id="hlz-b4-QeS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Setting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0Z-OO-bMa">
-                                                    <rect key="frame" x="16" y="11" width="576" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="98t-sU-0rS">
+                                                    <rect key="frame" x="15" y="12" width="32" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wVe-Nk-Mjw">
+                                                    <rect key="frame" x="543" y="12" width="42" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstItem="a0Z-OO-bMa" firstAttribute="centerY" secondItem="hlz-b4-QeS" secondAttribute="centerY" id="VWU-vX-0ec"/>
-                                                <constraint firstItem="a0Z-OO-bMa" firstAttribute="trailing" secondItem="hlz-b4-QeS" secondAttribute="trailingMargin" id="WWt-mZ-Sdo"/>
-                                                <constraint firstItem="a0Z-OO-bMa" firstAttribute="leading" secondItem="hlz-b4-QeS" secondAttribute="leadingMargin" constant="8" id="xBv-l7-IPc"/>
-                                            </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="settingTitleLabel" destination="a0Z-OO-bMa" id="y4Z-eO-4Vm"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -371,12 +382,6 @@
                                     <outlet property="delegate" destination="Mhe-89-q3E" id="ZcQ-LI-sL1"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gro-U0-Tmo">
-                                <rect key="frame" x="0.0" y="33" width="600" height="35"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="30"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -389,7 +394,9 @@
                             <constraint firstItem="R8K-dM-XEY" firstAttribute="leading" secondItem="YsT-nu-OAQ" secondAttribute="leading" id="pGP-Wk-VbE"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="Tj0-6z-FiO"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="settingsTabBarIcon" id="Tj0-6z-FiO">
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="settingsTableView" destination="R8K-dM-XEY" id="vsl-Ze-xhA"/>
                         <outlet property="settingsTitleLabel" destination="Gro-U0-Tmo" id="yYc-wC-0F9"/>
@@ -397,7 +404,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zk-zA-UsY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1466" y="939"/>
+            <point key="canvasLocation" x="1102" y="939"/>
         </scene>
         <!--To Do-->
         <scene sceneID="JWU-pB-k6O">
@@ -638,7 +645,7 @@
                                     <constraint firstAttribute="height" constant="50" id="sXq-Lh-RiH"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qiM-xv-Ebc">
                                 <rect key="frame" x="187" y="550" width="226" height="30"/>
@@ -656,7 +663,7 @@
                                     <constraint firstAttribute="height" constant="50" id="t4o-yl-HfE"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2P-Lp-Cec">
                                 <rect key="frame" x="20" y="390" width="560" height="50"/>
@@ -748,7 +755,7 @@
                             <textView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aq2-TY-cuA">
                                 <rect key="frame" x="4" y="20" width="492" height="1176"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Privacy Policy of Checker
+                                <string key="text">Privacy Policy of Checker
      
 In order to receive information about your Personal Data, the purposes and the parties the Data is shared with, contact the Owner.
 Data Controller and Owner
@@ -784,7 +791,7 @@ To determine whether any of the third party services it uses honor the “Do Not
 Changes to this privacy policy
 The Data Controller reserves the right to make changes to this privacy policy at any time by giving notice to its Users on this page. It is strongly recommended to check this page often, referring to the date of the last modification listed at the bottom. If a User objects to any of the changes to the Policy, the User must cease using this Application and can request that the Data Controller remove the Personal Data. Unless stated otherwise, the then-current privacy policy applies to all Personal Data the Data Controller has about Users.
 Information about this privacy policy
-The Data Controller is responsible for this privacy policy, prepared starting from the modules provided by Iubenda and hosted on Iubenda's servers.</mutableString>
+The Data Controller is responsible for this privacy policy, prepared starting from the modules provided by Iubenda and hosted on Iubenda's servers.</string>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -809,7 +816,7 @@ The Data Controller is responsible for this privacy policy, prepared starting fr
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6P-sq-cRh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="368" y="-1441"/>
+            <point key="canvasLocation" x="1354" y="-628"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="73Y-sT-jYm">
@@ -820,8 +827,7 @@ The Data Controller is responsible for this privacy policy, prepared starting fr
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="selectedImageTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.49019607843137253" green="0.75686274509803919" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="qcP-p3-fGE" kind="relationship" relationship="viewControllers" id="J8a-Fn-WOK"/>
@@ -833,11 +839,11 @@ The Data Controller is responsible for this privacy policy, prepared starting fr
             </objects>
             <point key="canvasLocation" x="388" y="159"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--List-->
         <scene sceneID="E2S-hl-P9h">
             <objects>
                 <navigationController storyboardIdentifier="navigationViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" navigationBarHidden="YES" id="qcP-p3-fGE" customClass="NavigationController" customModule="checker" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="mostViewed" id="ivH-1P-EPm"/>
+                    <tabBarItem key="tabBarItem" title="List" image="toDoListTabBarIcon" selectedImage="toDoListTabBarIcon" id="ivH-1P-EPm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j8t-f8-A2k" customClass="UILongNavigationBar" customModule="checker" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -858,7 +864,10 @@ The Data Controller is responsible for this privacy policy, prepared starting fr
         </scene>
     </scenes>
     <resources>
+        <image name="buddysTabBarIcon" width="30" height="30"/>
         <image name="loginBG" width="750" height="1334"/>
+        <image name="settingsTabBarIcon" width="26" height="26"/>
+        <image name="toDoListTabBarIcon" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="khh-n7-npc"/>

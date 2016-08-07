@@ -13,6 +13,7 @@ import Firebase
 
 class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet var sendComplimentButton: UIButton!
     @IBOutlet var complimentTitleLabel: UILabel!
     @IBOutlet var complimentPickerView: UIPickerView!
     @IBAction func sendComplimentBuddy(sender: UIButton) {
@@ -33,6 +34,7 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
         self.setComplimentsForPickerView()
         self.view.backgroundColor = UIColor.whiteColor()
         self.view.layer.cornerRadius = 5
+
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -80,9 +82,10 @@ class ComplimentViewController: UIViewController, UIPickerViewDelegate, UIPicker
             
             for tempCompliment in tempCompliments {
                 
-                self.complimentsArray.append(tempCompliment.1["compliment"] as! String)
+                self.complimentsArray.append(tempCompliment.1["complimentOption"] as! String)
                 
             }
+            self.complimentPickerView.reloadAllComponents()
             // ...
         }) { (error) in
             print(error.localizedDescription)

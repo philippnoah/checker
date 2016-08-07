@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var settingsTitleLabel: UILabel!
     @IBOutlet var settingsTableView: UITableView!
     
-    var taskArray = ["Block current buddy", "Logout"]
+    var taskArray = ["Contact", "Block current buddy", "Logout"]
     var ref = FIRDatabaseReference()
     
     override func viewDidLoad() {
@@ -34,7 +34,23 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("settingCell", forIndexPath: indexPath) as! SettingCell
-        cell.settingTitleLabel.text = self.taskArray[indexPath.row]
+        cell.textLabel!.text = self.taskArray[indexPath.row]
+        
+        switch indexPath.row {
+        case 0:
+            cell.detailTextLabel?.text = "philippnoah.dev@gmail.com"
+            cell.selectionStyle = .None
+        case 2:
+            cell.textLabel!.textColor = UIColor.redColor()
+            cell.detailTextLabel?.text = ""
+            //cell.detailTextLabel?.textAlignment = .Center
+        default:
+            cell.detailTextLabel?.text = ""
+        }
+        
+        let emptyBackgroundCellView = UIView()
+        emptyBackgroundCellView.backgroundColor = UIColor(red:0.47, green:0.75, blue:0.22, alpha:0.5)
+        cell.selectedBackgroundView = emptyBackgroundCellView
         
         return cell
     }
@@ -42,25 +58,20 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         switch indexPath.row {
-        case 1:
-            navigationController?.dismissViewControllerAnimated(true, completion: nil)
-            tabBarController?.dismissViewControllerAnimated(true, completion: nil)
-            self.dismissViewControllerAnimated(true, completion: nil)
-            RealmHelper.logout()
         case 0:
+            self.settingsTableView.cellForRowAtIndexPath(indexPath)?.selectionStyle = .None
+        case 2:
+            logoutRUSure()
+        case 1:
             //flag and remove buddy
             if RealmHelper.getUser()?.buddy == nil { return }
-            //rUSure()
+            rUSureRemoveBuddy()
             //if user has already been reported, delete from flaggedUsers and block access (still need to be added)
-            self.ref.child("flaggedUsers").childByAutoId().setValue(RealmHelper.getUser()?.buddy)
-            getCurrentUserIdAndDeleteBuddyOnFirebase()
-            RealmHelper.setBuddy(RealmHelper.getUser()!, setBuddy: nil)
-            LocalDataHelper.buddyTaskArray = []
-            flaggedAndRemovedBuddy()
-            //display alert(1: r u sure?, 2: deleted)
         default:
             print("default")
         }
+        
+        self.settingsTableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
     func getCurrentUserIdAndDeleteBuddyOnFirebase() {
@@ -68,16 +79,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         ref.child("users").observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             //Get users
             guard let tempListOfUsers = snapshot.value! as? [String: AnyObject] else {return}
-            
             for tempUser in tempListOfUsers {
-                
                 if tempUser.1["username"] as? String == RealmHelper.getUser()?.username {
                     self.ref.child("users").child(tempUser.0).child("buddy").setValue(nil)
                 }
-        
             }
-             
-            // ...
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -89,9 +95,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    func rUSure() {
+    func rUSureRemoveBuddy() {
         let alert = UIAlertController(title: "Remove buddy", message: "Are you sure? This action cannot be revoked.", preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler:  {
+            (alert: UIAlertAction!) in
+            self.ref.child("flaggedUsers").childByAutoId().setValue(RealmHelper.getUser()?.buddy)
+            self.getCurrentUserIdAndDeleteBuddyOnFirebase()
+            RealmHelper.setBuddy(RealmHelper.getUser()!, setBuddy: nil)
+            LocalDataHelper.buddyTaskArray = []
+            self.flaggedAndRemovedBuddy()
+            
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func logoutRUSure() {
+        let alert = UIAlertController(title: "Remove buddy", message: "Are you sure? This action cannot be revoked.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler:  {
+        (alert: UIAlertAction!) in
+            self.tabBarController?.dismissViewControllerAnimated(true, completion: nil)
+            self.dismissViewControllerAnimated(true, completion: nil)
+            RealmHelper.logout()
+        }))
         alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }

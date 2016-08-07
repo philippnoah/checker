@@ -93,6 +93,11 @@ extension ToDoListViewController {
         
         cell.textLabel!.text = taskArray[indexPath.row].title
         
+        if taskArray.count == 0 {
+            cell.textLabel!.text = "Press the + sign to create new tasks!"
+            cell.backgroundColor = UIColor(white:0.06, alpha:1.0)
+        }
+        
         let leftSwipeButton = MGSwipeButton(title: "Delete", backgroundColor: UIColor.redColor(), callback: {
             (sender: MGSwipeTableCell!) -> Bool in
             self.removeTaskFromFirebase(indexPath.row)
